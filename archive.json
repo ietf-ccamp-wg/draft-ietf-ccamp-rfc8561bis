@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-29T05:26:40.557038+00:00",
+  "timestamp": "2026-11-01T05:40:57.073337+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -166,7 +166,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2026-10-27T13:39:16Z",
+      "updatedAt": "2026-10-29T16:12:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -476,6 +476,27 @@
           "body": "I had a last check and from my point of view all is ready or a PR following the proposal on  https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2687533886",
           "createdAt": "2026-10-27T13:39:16Z",
           "updatedAt": "2026-10-27T13:39:16Z"
+        },
+        {
+          "author": "mamali68",
+          "authorAssociation": "COLLABORATOR",
+          "body": "```\n+--rw remote-child-rlt*            if:interface-ref  // NEW: MUST not be CT nor RLT\n+--rw remote-parent-rlt*            if:interface-ref  // NEW: MUST not be CT nor RLT\n```\n\nthis is still unclear, how can we refer to a remote instance of an Interface using IETF Interfaces. is the `if:interface-ref ` correct? to what reference is it poiniting? ",
+          "createdAt": "2026-10-29T11:04:51Z",
+          "updatedAt": "2026-10-29T11:04:51Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello\r\n\r\nI think that remote-child-rlt and remote-parent-rlt do not refer to remote\r\ninterface instances but they refer to local interconnect interfaces:\r\n\r\nremote-child-rlt:\r\n  Serves as the localized \"exit pipeline\" to route aggregated traffic down\r\nto a child RLT sitting on a separate remote chassis.\r\n\r\nremote-parent-rlt:\r\n  Acts as the local node's uplink pipe to pass traffic up to a master\r\nparent HRLT residing on the remote chassis.\r\n\r\nI.e.\r\nLet's say, that our System B has an RLT1 that downlinks the traffic from a\r\nSystem A / RLT1 to System C/ RLT1.\r\n\r\nA is connected for that traffic flow to B to the local i/f eth1 of B.\r\nAssume eth1 used also at A for this interconnection.\r\nB uses its local i/f eth2 to interconnect to C. Assume eth2 is also used at\r\nC for this interconnection.\r\nThen at B:\r\nremote-child-rlt = eth2  (i/f of B)\r\nremote-parent-rlt = eth1 (i/f of B)\r\n\r\nAt A:\r\nremote-child-rlt = eth1 (i/f of A)\r\nremote-parent-rlt = NotExist (A is the HRLT).\r\n\r\nAt C:\r\nremote-child-rlt = NotExist (C has no child RLT\r\nremote-parent-rlt = eth2 (i/f of C)\r\n\r\nBEST REGARDS\r\n\r\n\r\n*Theodoros Kallimanis *Principal Engineer (Systems & SW)\r\n\r\nDepartment SSD\r\n________________________________\r\nIntracom Telecom\r\n19.7 km New Road Peania-Markopoulo,\r\n\r\nPeania, GR 19002\r\nt:   +30 6671961\r\nf:   +30 6671446\r\nm: +30 6941636679\r\nemail ***@***.*** ***@***.***>\r\nwww.intracom-telecom.com\r\n\r\n\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a0\u03ad\u03bc 29 \u039f\u03ba\u03c4 2026 \u03c3\u03c4\u03b9\u03c2 1:05\u202f\u03bc.\u03bc., \u03bf/\u03b7 Mohammad Boroon <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> *mamali68* left a comment (samans/draft-ybam-rfc8561bis#2)\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-6494954807>\r\n>\r\n> +--rw remote-child-rlt*            if:interface-ref  // NEW: MUST not be CT nor RLT\r\n> +--rw remote-parent-rlt*            if:interface-ref  // NEW: MUST not be CT nor RLT\r\n>\r\n> this is still unclear, how can we refer to a remote instance of an\r\n> Interface using IETF Interfaces. is the if:interface-ref correct? to what\r\n> reference is it poiniting?\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/2?email_source=notifications&email_token=AAS3DVK4LKJ6UPN3W2PGZX35WMP6VA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTMNBZGQ4TKNBYGA32M4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJLDGN5XXIZLSL5RWY2LDNM#issuecomment-6494954807>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVOINPFDR32GYYRNRZL5WMP6VAVCNFSNUABFKJSXA33TNF2G64TZHM2DQMJWGIYDCNRSHNEXG43VMU5TCMRRGA4DKNJYHAY2C5QC>\r\n> .\r\n> Triage notifications, keep track of coding agent tasks and review pull\r\n> requests on the go with GitHub Mobile for iOS\r\n> <https://github.com/notifications/mobile/ios/AAS3DVJUIAFEUR27XNC744T5WMP6VA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTMNBZGQ4TKNBYGA32M4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJKTGN5XXIZLSL5UW64Y>\r\n> and Android\r\n> <https://github.com/notifications/mobile/android/AAS3DVOXSS6Q2WDGTE22QY35WMP6VA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTMNBZGQ4TKNBYGA32M4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJLTGN5XXIZLSL5QW4ZDSN5UWI>.\r\n> Download it today!\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2026-10-29T14:25:46Z",
+          "updatedAt": "2026-10-29T14:25:46Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See also https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2609488890 where Italo shared the last slides (v05) with all naming definition",
+          "createdAt": "2026-10-29T16:07:07Z",
+          "updatedAt": "2026-10-29T16:12:58Z"
         }
       ]
     },
@@ -2758,32 +2779,48 @@
       "id": "I_kwDOHLTwws7vF43t",
       "title": "Update the Revision Statements",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "> ### ietf-interface-protection\n> ```\n>   revision 2026-02-26 {\n>     description\n>       \"Canonical Order and copyright updated\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2024-03-03 {\n>     description\n>       \"Updating reference to RFC XXXX. - pretty printing\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2020-10-06 {\n>     description\n>       \"Updating reference to RFC XXXX.\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ```\n> \n> ### ietf-microwave-radio-link\n> \n> ```\n>  revision 2026-02-26 {\n>    description\n>      \"TBD\";\n>    reference\n>      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>  }\n>  revision 2026-01-15 {\n>     description\n>       \"Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-04-04 {\n>     description\n>       \"Draft - Issue #32 Compression,\n>                Issue #35 grouping common-microwave-properties,\n>                Issue #31 added minimum-nominal-power\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ```\n> \n> ### ietf-microwave-types\n> \n> ```\n>   revision 2026-02-26 {\n>     description\n>       \"Coding Modulation value to cover new modulation value.\n>        New rlt-mode grouping to remove duplication.\n>       \";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-04-04 {\n>     description\n>       \"Draft - Comression #32, new grouping Issue #35\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ``` \n\n _Originally posted by @samans in [#56](https://github.com/samans/draft-ybam-rfc8561bis/issues/56#issuecomment-3984064041)_",
       "createdAt": "2026-03-02T13:31:46Z",
-      "updatedAt": "2026-03-02T13:31:46Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T15:26:38Z",
+      "closedAt": "2026-10-29T15:26:38Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Updated by pull request 2026-10-refresh",
+          "createdAt": "2026-10-29T15:26:38Z",
+          "updatedAt": "2026-10-29T15:26:38Z"
+        }
+      ]
     },
     {
       "number": 60,
       "id": "I_kwDOHLTwws7vIcA7",
       "title": "Fix md file to get yang trees from yang directory",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/60",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Fix the .md file to get yang trees from yang directory and delete the trees directory.\n\nThe trees are generated by the compile.bash script and stored in the yang/ directory.\n",
       "createdAt": "2026-03-02T15:52:00Z",
-      "updatedAt": "2026-03-02T15:52:00Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T15:22:15Z",
+      "closedAt": "2026-10-29T15:22:15Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "2026-10 pull request",
+          "createdAt": "2026-10-29T15:22:15Z",
+          "updatedAt": "2026-10-29T15:22:15Z"
+        }
+      ]
     },
     {
       "number": 61,
@@ -4787,6 +4824,46 @@
               "updatedAt": "2026-05-02T09:31:26Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "id": "PR_kwDOHLTwws8AAAABLkD7CA",
+      "title": "2026-10-refresh",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/66",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Clean up and refresh of draft for IETF 127",
+      "createdAt": "2026-10-29T15:35:43Z",
+      "updatedAt": "2026-10-29T16:11:47Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "430d939471c01d911abd13cc5e09b8a4f6c0f83a",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "2026-10-refresh",
+      "headRefOid": "d71807f17feba1c1ea43f7e6479c2e095f9bae27",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws8AAAABU88AnQ",
+          "commit": {
+            "abbreviatedOid": "d71807f"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I approuve the Refresh.",
+          "createdAt": "2026-10-29T16:11:47Z",
+          "updatedAt": "2026-10-29T16:11:47Z",
+          "comments": []
         }
       ]
     }
