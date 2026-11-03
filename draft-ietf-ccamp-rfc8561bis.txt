@@ -259,20 +259,22 @@ Table of Contents
            +--rw members*   if:interface-ref
 
      augment /if:interfaces/if:interface:
-       +--rw id?                     string
+       +--rw id?                         string
+       +--rw far-end-id-check-enabled?   boolean
+       +--rw expected-far-end-id?        string
        +--rw (mode-option)
        |  x--:(mode)
-       |  |  x--rw mode              identityref
+       |  |  x--rw mode                  identityref
        |  +--:(rlt-mode)
        |     +--rw rlt-mode
        |        +--rw num-bonded-carriers        uint32
        |        +--rw num-protecting-carriers    uint32
-       +--rw carrier-terminations*   if:interface-ref
+       +--rw carrier-terminations*       if:interface-ref
        +--rw rlp-groups*
        |       -> /radio-link-protection-groups/protection-group/name
-       +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name
+       +--rw xpic-pairs*                 -> /xpic-pairs/xpic-pair/name
        |       {xpic}?
-       +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
+       +--rw mimo-groups*                -> /mimo-groups/mimo-group/name
        |       {mimo}?
        +--rw tdm-connections* [tdm-type] {tdm}?
        |  +--rw tdm-type           identityref
@@ -285,22 +287,24 @@ Table of Contents
           +--rw enabled?              boolean
           +--ro oper-status?          enumeration
      augment /if:interfaces/if:interface:
-       +--rw carrier-id?                     string
-       +--rw tx-enabled?                     boolean
-       +--ro tx-oper-status?                 enumeration
-       +--rw tx-frequency                    uint32
-       +--ro actual-rx-frequency?            uint32
-       +--rw channel-separation              uint32
-       +--ro actual-transmitted-level?       power
-       +--ro actual-tx-cm?                   identityref
-       +--ro actual-snir?                    decimal64
+       +--rw carrier-id?                         string
+       +--rw far-end-carrier-id-check-enabled?   boolean
+       +--rw expected-far-end-carrier-id?        string
+       +--rw tx-enabled?                         boolean
+       +--ro tx-oper-status?                     enumeration
+       +--rw tx-frequency                        uint32
+       +--ro actual-rx-frequency?                uint32
+       +--rw channel-separation                  uint32
+       +--ro actual-transmitted-level?           power
+       +--ro actual-tx-cm?                       identityref
+       +--ro actual-snir?                        decimal64
        +--rw (freq-or-distance)
        |  +--:(rx-frequency)
-       |  |  +--rw rx-frequency?             uint32
+       |  |  +--rw rx-frequency?                 uint32
        |  +--:(duplex-distance)
-       |     +--rw duplex-distance?          int32
-       +--ro actual-duplex-distance?         uint32
-       +--rw polarization?                   enumeration
+       |     +--rw duplex-distance?              int32
+       +--ro actual-duplex-distance?             uint32
+       +--rw polarization?                       enumeration
        +--rw (power-mode)
        |  +--:(rtpc)
        |  |  +--rw rtpc
@@ -311,7 +315,7 @@ Table of Contents
        |        +--rw minimum-nominal-power    mw-types:power
        |        +--rw atpc-lower-threshold     mw-types:power
        |        +--rw atpc-upper-threshold     mw-types:power
-       +--ro actual-received-level?          mw-types:power
+       +--ro actual-received-level?              mw-types:power
        +--rw (coding-modulation-mode)
        |  +--:(single)
        |  |  +--rw single
@@ -321,13 +325,13 @@ Table of Contents
        |        +--rw selected-min-acm        identityref
        |        +--rw selected-max-acm        identityref
        |        +--rw reference-modulation?   identityref
-       +--ro actual-xpi?                     decimal64 {xpic}?
+       +--ro actual-xpi?                         decimal64 {xpic}?
        +--rw ct-performance-thresholds
        |  +--rw received-level-alarm-threshold?      mw-types:power
        |  +--rw transmitted-level-alarm-threshold?   mw-types:power
        |  +--rw ber-alarm-threshold?                 enumeration
-       +--rw if-loop?                        enumeration
-       +--rw rf-loop?                        enumeration
+       +--rw if-loop?                            enumeration
+       +--rw rf-loop?                            enumeration
        +--ro capabilities
        |  +--ro min-tx-frequency?          uint32
        |  +--ro max-tx-frequency?          uint32
@@ -458,9 +462,9 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2026-03-02 {
+     revision 2026-10-29 {
        description
-         "TBD";
+         "Refresh before working group adoption";
        reference
          "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
@@ -1602,9 +1606,9 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2026-03-02 {
+     revision 2026-10-29 {
        description
-         "Canonical Order and copyright updated";
+         "Refresh before working group adoption";
        reference
          "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
@@ -1885,9 +1889,9 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2026-03-02 {
+     revision 2026-10-29 {
        description
-         "TBD";
+         "Refresh before working group adoption";
        reference
          "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
