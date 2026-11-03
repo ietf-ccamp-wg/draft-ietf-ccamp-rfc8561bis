@@ -6,17 +6,17 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 2 May 2027                                                M. Ye
+Expires: 7 May 2027                                                M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                            Tech Mahindra
-                                                         29 October 2026
+                                                         3 November 2026
 
 
                A YANG Data Model for Microwave Radio Link
-                   draft-ybam-ccamp-rfc8561bis-latest
+                   draft-ietf-ccamp-rfc8561bis-latest
 
 Abstract
 
@@ -34,7 +34,7 @@ About This Document
 
    The latest revision of this draft can be found at
    https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-ybam-ccamp-
+   be found at https://datatracker.ietf.org/doc/draft-ietf-ccamp-
    rfc8561bis/.
 
    Discussion of this document takes place on the CCAMP Working Group
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 May 2027.
+   This Internet-Draft will expire on 7 May 2027.
 
 Copyright Notice
 
