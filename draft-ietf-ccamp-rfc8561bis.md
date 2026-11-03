@@ -339,7 +339,7 @@ such as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF
 layer is the secure transport layer, and the mandatory-to-implement
 secure transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest
 RESTCONF layer is HTTPS, and the mandatory-to-implement secure
-transport is TLS {{!RFC8446}}.
+transport is TLS {{!RFC9846}}.
 
 The Network Configuration Access Control Model (NACM) {{!RFC8341}}
 provides the means to restrict access for particular NETCONF or
