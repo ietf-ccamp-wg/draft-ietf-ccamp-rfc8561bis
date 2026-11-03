@@ -1608,7 +1608,7 @@ Table of Contents
 
      revision 2026-10-29 {
        description
-         "TBD";
+         "Canonical order and copyright updated.";
        reference
          "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
