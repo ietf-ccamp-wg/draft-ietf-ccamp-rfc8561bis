@@ -2,18 +2,18 @@
 
 # A YANG Data Model for Microwave Radio Link
 
-This is the working area for the individual Internet-Draft, "A YANG Data Model for Microwave Radio Link".
+This is the working area for the IETF [CCAMP Working Group](https://datatracker.ietf.org/group/ccamp/documents/) Internet-Draft, "A YANG Data Model for Microwave Radio Link".
 
-* [Editor's Copy](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-ccamp-rfc8561bis.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ybam-ccamp-rfc8561bis)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ybam-ccamp-rfc8561bis)
-* [Compare Editor's Copy to Individual Draft](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-ccamp-rfc8561bis.diff)
+* [Editor's Copy](https://ietf-ccamp-wg.github.io/draft-ietf-ccamp-rfc8561bis/#go.draft-ietf-ccamp-rfc8561bis.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-ccamp-rfc8561bis)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-rfc8561bis)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-ccamp-wg.github.io/draft-ietf-ccamp-rfc8561bis/#go.draft-ietf-ccamp-rfc8561bis.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/samans/draft-ybam-rfc8561bis/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/blob/main/CONTRIBUTING.md).
 
 The contributing file also has tips on how to make contributions, if you
 don't already know how to do that.
