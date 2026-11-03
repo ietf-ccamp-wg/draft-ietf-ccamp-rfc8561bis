@@ -71,7 +71,7 @@ module ietf-microwave-radio-link {
 
   revision 2026-10-29 {
     description
-      "Refresh before working group adoption";
+      "TBD";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
