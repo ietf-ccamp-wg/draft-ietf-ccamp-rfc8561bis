@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-01T05:40:57.073337+00:00",
+  "timestamp": "2026-11-03T06:19:56.815238+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -916,7 +916,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-10-20T08:42:33Z",
+      "updatedAt": "2026-11-02T14:35:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -1184,6 +1184,13 @@
           "body": "I've received some additional info.\nRMI is not a 1:1 mapping to SEC. SEC includes more info which is required to consider, e.g. which spectrum mask to fulfill. So we are back to SEC as the identifier, I think.\nSee 5LA and 5LB in the table below as an example.\n\n<img width=\"688\" height=\"504\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/0277d92d-c43c-43be-a7ee-a23299bd1045\" />",
           "createdAt": "2026-10-20T08:42:33Z",
           "updatedAt": "2026-10-20T08:42:33Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "After additional discussions with radio experts, our conclusion is the following:\n- Subclass A is normally no longer used, but ETSI has still decided to keep it in their standard in order to cover legacy\n- Subclass B is what is used today, and it is more strict than subclass A, which means that if you fulfill B you also fulfill A.\n--> Let's use RMI as the identifier (as earlier suggested) and include a statement in the description that in cases where there are subclasses both should be fulfilled.\n- In case someone really needs to model A and B, an additional proprietary leaf can be added to support that without having to change the standard model using RMI.",
+          "createdAt": "2026-11-02T14:35:12Z",
+          "updatedAt": "2026-11-02T14:35:12Z"
         }
       ]
     },
