@@ -1,7 +1,7 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T06:19:56.815238+00:00",
-  "repo": "samans/draft-ybam-rfc8561bis",
+  "timestamp": "2026-11-05T06:16:17.818419+00:00",
+  "repo": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
   "labels": [
     {
       "name": "bug",
@@ -119,7 +119,7 @@
       "number": 1,
       "id": "I_kwDOHLTwws5ILBn1",
       "title": "Make a recap of previous requirements/discussions about an updated version of RFC",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/1",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/1",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -152,7 +152,7 @@
       "number": 2,
       "id": "I_kwDOHLTwws5ILDHJ",
       "title": "Band & Carrier Aggregation",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/2",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/2",
       "state": "OPEN",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -206,7 +206,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Proposed Solution includes:\r\n\r\nAdding a new augment to interface called \"HRLT\" (name to be discussed).\r\nNeed to complete the discussion on attributes to add to HRLT, see slide 6 of the pptx from above.",
           "createdAt": "2023-06-15T09:53:46Z",
           "updatedAt": "2023-06-15T09:53:46Z"
@@ -227,7 +227,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Here are some notes related to two options for the model.\r\n```\r\nOption 1: Using a new ianaift for hierarchical radio link terminal\r\n\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from-or-self(if:type,\"\r\n       + \"'ianaift:microwaveRadioLinkTerminal')\";\r\nand\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from-or-self(if:type,\"\r\n       + \"'ianaift:hierarchicalRadioLinkTerminal')\";\r\n\r\nThe augment for hierarchicalRadioLinkTerminal would be in a different module providing a different name space (hrt).\r\n\t   \r\nmodule: ietf-interfaces\r\n  +--rw interfaces\r\n  |  +--rw interface* [name]\r\n  ...\r\n    |     +--ro higher-layer-if*                    interface-ref\r\n    |     +--ro lower-layer-if*                     interface-ref\r\n  ...\t\r\n    |     +--rw mrl:id?                                 string\r\n    |     +--rw mrl:mode                            identityref\r\n    |     +--rw mrl:carrier-terminations*    if:interface-ref\r\n  ...\r\n    |     +--rw hrl:bca-members*              if:interface-ref\r\n\r\nNew attributes needed for hrl would be in the hrl namespace and only needed if the interface is hierarchical.  The existing mrl namespace doesn't need to change.\r\n\r\nOption 2: Using a new leaf in mrl to identify the role the interface plays\r\n\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from-or-self(if:type,\"\r\n       + \"'ianaift:microwaveRadioLinkTerminal')\";\r\n\t   \r\nmodule: ietf-interfaces\r\n  +--rw interfaces\r\n  |  +--rw interface* [name]\r\n  ...\r\n    |     +--ro higher-layer-if*                   interface-ref\r\n    |     +--ro lower-layer-if*                    interface-ref\r\n  ...\t\r\n    |     +--rw mrl:id?                                string\r\n    |     +--rw mrl:mode                           identityref\r\n    |     +--rw mrl:carrier-terminations*   if:interface-ref\r\n  ...\r\n    |     +--rw mrl:role            \t\t       identityref\r\n  ...\r\n    |     +--rw mrl:bca-members*             if:interface-ref\r\n  ...\r\n  \r\nAn identity ref could be created (or just an enumeration or even a boolean) that indicated if the mrl was \"terminating\" or \"not-terminating\". Other leafs for the \"non-terminating\" case would be in the same name space.\r\n```\r\n\r\n",
           "createdAt": "2023-09-07T19:19:47Z",
           "updatedAt": "2023-09-07T19:25:47Z"
@@ -311,7 +311,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Diagram including questions from discussion on 2024-11-14.\r\n[bca-model-questions-2024-11-14.pptx](https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx)\r\n",
           "createdAt": "2024-11-14T11:31:35Z",
           "updatedAt": "2024-11-14T11:31:35Z"
@@ -339,14 +339,14 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "> Hello Daniela, Scott and all Daniela just a question. Should the +--rw parent-remote-carrier? if:interface-ref be a leaf-list? I.e. Is there a case with more than one parent-remote-carriers? Best regards Theodoros Kallimanis \u03a3\u03c4\u03b9\u03c2 \u03a4\u03b5\u03c4 20 \u039d\u03bf\u03b5 2024 \u03c3\u03c4\u03b9\u03c2 6:55\u202f\u03bc.\u03bc., \u03bf/\u03b7 DanielaSpreafico < ***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n> [\u2026](#)\r\n> Trying to answer to the question on bca-model-questions-2024-11-14.pptx <https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx> : *Question-1*: Are RLT-B1 and RLT_C1 needed? *Answer*: Some advantages of modelling RLT-B1 and RLT-C1: 1. They simplify the management of nodes B1 and C1 expecially when they are flexible and allow the configuration of packet services or remote carriers 2. The parent-cc attribute with the RLT can be used to associate CC-B1 with CT-B1 and CC-C1 with CT-C1 The definition of this RLT could be seen as a bit \"stretched\" but it could be seen as \"an interface providing packet capacity and/or TDM capacity to the associated packet and/or TDM interfaces in a node and is used for setting up a a remote carrier transport service over a microwave/millimeter wave link\" *Question 2*: Are CC interfaces needed? *Answer:* It seems that the model would work well without a new CC interface Slides updated (see BCA.Proposal.for.ccamp.v02.pptx <https://github.com/user-attachments/files/17834000/BCA.Proposal.for.ccamp.v02.pptx>) and the following attributes can be renamed: - parent-cc --> parent-remote-carrier - carrier-connectors* -> remote-carrier-terminations \u2014 Reply to this email directly, view it on GitHub <[#2 (comment)](https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2489109036)>, or unsubscribe <https://github.com/notifications/unsubscribe-auth/AAS3DVLLXD7GT7455HS2QXL2BS5I7AVCNFSM5T62TEK2U5DIOJSWCZC7NNSXTN2JONZXKZKDN5WW2ZLOOQ5TENBYHEYTAOJQGM3A> . You are receiving this because you commented.Message ID: ***@***.***>\r\n\r\nFrom the functional description of the use cases I have seen so far, there is always a single remote carrier interface associated with the RLT in the remote nodes (nodes B and C)\r\n\r\nI do not know what could be the semantics of multiple parent remote carriers ...\r\n\r\nDo you have any scenario or use cases where there could be more than one?",
           "createdAt": "2024-11-28T12:55:57Z",
           "updatedAt": "2024-11-28T12:55:57Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Slides updated based on the discussion last week (November 21, 2024): [BCA.Proposal.for.ccamp.v03.pptx](https://github.com/user-attachments/files/17948330/BCA.Proposal.for.ccamp.v03.pptx)\r\n\r\nI am not sure which scenario 3 should be added so I have added two alternatives (3A and 3B) for further discussion in the next call\r\n\r\nI have also added a slides with the open issues that still need to be investigated/discussed",
           "createdAt": "2024-11-28T12:57:28Z",
           "updatedAt": "2024-11-28T12:57:28Z"
@@ -367,7 +367,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "> * Radio Link Terminal: an interface providing Ethernet capacity and/or Time Division Multiplexing (TDM) capacity to the associated Ethernet and/or TDM interfaces in a node. It is used for setting up a transport service over a microwave radio link.\r\n\r\nIt would be worthwhile having some discussion in one of the next calls\r\n\r\nSince the interface between RLT-A1 and RLT-A2 can be TDM or Ethernet, we may consider the definition still valid with some \"stretches\"\r\n\r\nAlternatively, we may consider generalizing the definition to something like:\r\n\r\n      *  Radio Link Terminal: an interface providing packet capacity\r\n         and/or Time Division Multiplexing (TDM) capacity to the\r\n         associated client interfaces (e.g., Ethernet or TDM) in a node.  It is\r\n         used for setting up a transport service over a microwave radio\r\n         link.\r\n\r\nJust my 2 cents to trigger further thoughts/discussion\r\n",
           "createdAt": "2024-12-05T08:49:20Z",
           "updatedAt": "2024-12-05T08:49:20Z"
@@ -388,7 +388,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "The slides updated during the call today: [BCA.Proposal.for.ccamp.v04.pptx](https://github.com/user-attachments/files/18110408/BCA.Proposal.for.ccamp.v04.pptx)\r\n",
           "createdAt": "2024-12-12T11:01:45Z",
           "updatedAt": "2024-12-12T11:01:45Z"
@@ -402,14 +402,14 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-01-23 Call**\n\nThe slides updated during the call today: [BCA.Proposal.for.ccamp.v05.pptx](https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx)\n\nNeed to clarify that if the different nodes are managed as a single device, RFC 8561 has no gaps to support BCA across multiple nodes with a flat RLT configuration.\n\nThe model extensions are design to support:\n1. the cases where the two nodes are managed as independent devices\n2. ,hierarchical RLT configurations (in a single or multiple nodes)\n",
           "createdAt": "2025-01-23T10:51:24Z",
           "updatedAt": "2025-01-23T11:20:06Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-02-27 Call**\n\nAgreed to create a new issue #45 to track the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nAgreed to define the following YANG tree for BCA:\n\n```\naugment /if:interfaces/if:interface:\n    +--rw id?                          string\n    +--rw mode                         identityref\n    +--rw carrier-terminations*        if:interface-ref  // MUST be CT\n    +--rw local-child-rlt*             if:interface-ref  // NEW: MUST be RLT\n    +--rw remote-child-rlt*            if:interface-ref  // NEW: MUST not be CT nor RLT\n    +--rw rlp-groups*\n    |       -> /radio-link-protection-groups/protection-group/name\n    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name\n    |       {xpic}?\n    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name\n    |       {mimo}?\n    +--rw remote-parent-rlt?           if:interface-ref  // NEW: MUST not be CT nor RLT\n    +--rw tdm-connections* [tdm-type] {tdm}?\n       +--rw tdm-type             identityref\n       +--rw tdm-connections      uint16\n```\n\n",
           "createdAt": "2025-02-27T10:29:37Z",
           "updatedAt": "2025-02-27T10:31:25Z"
@@ -430,7 +430,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "> How about the final proposal? We can think to accept it?\n\nThe proposal has been agreed in https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2687533886\n\nThe YANG code changes still need to be proposed through a PR",
           "createdAt": "2025-07-31T09:24:45Z",
           "updatedAt": "2025-07-31T09:24:45Z"
@@ -458,14 +458,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "AI to request @italobusi to provide an update on this issue.",
           "createdAt": "2026-10-08T09:45:34Z",
           "updatedAt": "2026-10-08T09:45:34Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "> AI to request [@italobusi](https://github.com/italobusi) to provide an update on this issue.\n\nI think the status is the same as in https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-3139194191\n\n> The proposal has been agreed in [#2 (comment)](https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2687533886)\n> The YANG code changes still need to be proposed through a PR",
           "createdAt": "2026-10-08T17:43:07Z",
           "updatedAt": "2026-10-08T17:44:56Z"
@@ -504,7 +504,7 @@
       "number": 3,
       "id": "I_kwDOHLTwws5JKqhB",
       "title": "Fade Margin",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/3",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/3",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -519,14 +519,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Installation and Commissioning time tool, traffic effecting.  Automated procedure that identifies interference issues at startup time.  Not related to ATPC which is something that can used during operation.  Fade Margin is calculated during the initial setup of a microwave device by reducing the remote-end power until the signal is lost.  The information is collected once and stored in the equipment (because it is radio terminal specific).  Fade Margin is collected per modulation, so that the SDN controller have the information related to S/N ratio per modulation for each radio terminal.  Keep this at the application level and not store per equipment.\r\nIs Fade Margin one number or multiple numbers?  One option is that Fade Margin is one number and calculated by the equipment.  There is not a different number per modulation.\r\nWhere do we want to store the number(s)?\r\n",
           "createdAt": "2023-05-25T09:39:55Z",
           "updatedAt": "2023-05-25T09:39:55Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Fade Margin is one number, calculated at installation time.  The margin comes from the planning tool and the test at installation time validates the number.\r\n\r\nNumber from testing is not stored.\r\nClose this requirement and reevaluate if a new contribution is brought.\r\n",
           "createdAt": "2023-06-08T09:12:14Z",
           "updatedAt": "2023-06-08T09:12:14Z"
@@ -537,7 +537,7 @@
       "number": 4,
       "id": "I_kwDOHLTwws5JKq4V",
       "title": "BER, Errored block - EB, Mean Time between outages, Outage intesity",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/4",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/4",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -552,14 +552,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "https://www.etsi.org/deliver/etsi_gr/mWT/001_099/019/01.01.01_60/gr_mWT019v010101p.pdf \r\nThere are performance metrics already in the device.  ETSI WT19 has composite metrics that are calculated by a controller application.  Need to understand the requirements.  Need to determine what needs to be stored on the equipment itself.  Understand what the objective is for this requirement and how they will be used.\r\n",
           "createdAt": "2023-05-25T09:46:19Z",
           "updatedAt": "2023-05-25T09:46:19Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "BER and related stats are not in the scope of CCAMP.  The Outage intensity and Mean Time between outages are examples of stats that are computed and are not specific to Radio Link models.",
           "createdAt": "2023-06-08T18:28:15Z",
           "updatedAt": "2023-06-08T18:28:15Z"
@@ -570,7 +570,7 @@
       "number": 5,
       "id": "I_kwDOHLTwws5JKrQi",
       "title": "Current Alarm Specific Problem, Historical Alarm Specific Problem",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/5",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/5",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -590,7 +590,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Follow RFC 8632, and close this issue related to the radio-link YANG work.",
           "createdAt": "2023-05-25T09:48:53Z",
           "updatedAt": "2023-05-25T09:48:53Z"
@@ -601,7 +601,7 @@
       "number": 6,
       "id": "I_kwDOHLTwws5JKr1P",
       "title": "Maximum Link/Carrier Utilization %",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/6",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/6",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -616,14 +616,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Review the discussion here: https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-mw-topo-yang/issues/3\r\nIs this a measurement that is done on the link layer or ethernet layer?\r\nWhat is the time-period used to calculate this utilization?  Can\u2019t be instantaneous but has to be over a period of time (so how long?).",
           "createdAt": "2023-05-25T09:53:30Z",
           "updatedAt": "2023-05-25T09:53:30Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "From the radio side there is no utilization, utilization is calculated by throughput and bandwidth utilization percentage at the application level.",
           "createdAt": "2023-06-08T18:29:32Z",
           "updatedAt": "2023-06-08T18:29:32Z"
@@ -634,7 +634,7 @@
       "number": 7,
       "id": "I_kwDOHLTwws5JKr7n",
       "title": "Latency",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/7",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/7",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -649,14 +649,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Parameter inside each modulation mode, that provides information about the latency of the processing in the microwave device.  Could be used as input into calculating if a service is possible based on the equipment in the path.",
           "createdAt": "2023-05-25T10:08:14Z",
           "updatedAt": "2023-05-25T10:08:14Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Latency doesn't belong in the Radio Link model.  Something that is calculated at the application layer.",
           "createdAt": "2023-06-08T18:30:41Z",
           "updatedAt": "2023-06-08T18:30:41Z"
@@ -667,7 +667,7 @@
       "number": 8,
       "id": "I_kwDOHLTwws5JKsFj",
       "title": "Electrical Power Consumption",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/8",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/8",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -682,7 +682,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Have one number per chassis.  Information about power consumption is not microwave specific so, not needed here in the radio link model.",
           "createdAt": "2023-06-08T10:00:29Z",
           "updatedAt": "2023-06-08T10:00:29Z"
@@ -693,10 +693,10 @@
       "number": 9,
       "id": "I_kwDOHLTwws5KAMEP",
       "title": "mode option",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/9",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/9",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "samans",
         "italobusi"
@@ -709,7 +709,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Discussed the following use of \"choice\" as described in [https://datatracker.ietf.org/doc/html/draft-ietf-netmod-yang-module-versioning-05#appendix-B.2](url).\r\n\r\nThe following works.  However, in the case of deprecating a leaf and replacing it with another leaf/container is considered a non-backward-compatible change by YANG versioning.  The pyang tooling points this out.  However, the implementation provides the ability to use old schema instance data with the new schema.\r\n\r\nThe following needs to be implemented in both ietf-microwave-radio-link and ietf-microwave-topology\r\n```\r\nmodule mw-option {\r\n  yang-version 1.1;\r\n  namespace \"urn:test:mw-option\";\r\n  prefix mwo;\r\n\r\n  organization\r\n    \"Test\";\r\n  contact\r\n    \"Test contact\";\r\n  description\r\n    \"Option Backward Compatible Change Example\";\r\n\r\n  revision 2022-05-26 {\r\n    description\r\n      \"Change the way rlt mode is defined\";\r\n    reference\r\n      \"mw-option test\";\r\n  }\r\n  revision 2022-04-01 {\r\n    description\r\n      \"Initial revision.\";\r\n    reference\r\n      \"mw-option test\";\r\n  }\r\n\r\n  identity rlt-mode {\r\n    status deprecated;\r\n    description\r\n      \"Radio Link Terminal mode\";\r\n  }\r\n\r\n  identity one-plus-zero {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  identity one-plus-one {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  identity two-plus-zero {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  container rlt-db {\r\n    description\r\n      \"Radio Link Terminal\";\r\n    choice mode-option {\r\n      mandatory true;\r\n      leaf mode {\r\n        status deprecated;\r\n        type identityref {\r\n          base rlt-mode;\r\n        }\r\n      }\r\n      container rlt-mode {\r\n        description\r\n          \"mode configuration\";\r\n        leaf num-bonded-carriers {\r\n          type uint32;\r\n          mandatory true;\r\n          description\r\n            \"Number of bonded carriers\";\r\n        }\r\n        leaf num-protecting-carriers {\r\n          type uint32;\r\n          mandatory true;\r\n          description\r\n            \"Number of protecting carriers\";\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n```",
           "createdAt": "2022-06-03T19:10:57Z",
           "updatedAt": "2022-06-03T19:12:31Z"
@@ -720,10 +720,10 @@
       "number": 11,
       "id": "I_kwDOHLTwws5Q-Vl9",
       "title": "duplex-distance datatype",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/11",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/11",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "DanielaSpreafico"
       ],
@@ -746,10 +746,10 @@
       "number": 12,
       "id": "I_kwDOHLTwws5Q-igh",
       "title": "Clarify backward combability for the new RTL mode",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/12",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/12",
       "state": "CLOSED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "After discussion with Netmod WG experts it is confirmed that the changes proposed in PR #10 will not break any existing client implementation based on RFC8561 but they are not backward compatible, according to the rules defined in section 11 of RFC7950, and that there are no alternatives to meet the rules defined in section 11 of RFC7950\r\n\r\nNeed to clarify this in the I-D text\r\n",
@@ -759,7 +759,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Closed, there is a choice for the configuration so backward compatibility is not effected.",
           "createdAt": "2023-06-15T09:57:30Z",
           "updatedAt": "2023-06-15T09:57:30Z"
@@ -770,7 +770,7 @@
       "number": 13,
       "id": "I_kwDOHLTwws5hk2M_",
       "title": "identityref coding-modulation does not cover all values ",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/13",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/13",
       "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
@@ -799,14 +799,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Discussed on 4 May 2023 call:\r\nThis issue is related to #14 and #15 and if resolved, the other two issues can be closed.\r\n\r\nDiscussing Danilo's and Daniela's comments the following was decided to propose for the next draft of the YANG module:\r\n\r\nThe acm-profile-list is added to the capabilities container.  the acm-profile-list uses the grouping called acm-profile and is indexed by profile-coding-modulation-id and profile-channel-separation-id.\r\n\r\nUse a new attribute called nominal-tx-capacity, instead of code-rate and symbol-rate-reduction because the calculation of nominal-tx-capacity is derived from code-rate and symbol-rate-reduction by formulas that are not standardized and are specific to the equipment.  So the nominal-tx-capacity value should be provided to avoid confusion on how to calculate it.\r\n\r\nRename minimum-power to min-tx-power and maximum-available-power to max-tx-power.\r\n\r\nDiscussion on upshift and downshift with the ONF, it is unclear how to fill out those values.\r\n\r\nOther issues related to atpc, need to be made into new issues.",
           "createdAt": "2023-05-04T19:44:54Z",
           "updatedAt": "2023-05-04T19:44:54Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Update from 4 May:\r\nkeep minimum-power and maximum-available-power names because those are the names used in the ETSI documents.\r\nSuggestion to remove upshift and downshift from the proposal above.\r\n\r\nadd: 8 PSK modulation\r\n",
           "createdAt": "2023-05-11T09:16:45Z",
           "updatedAt": "2023-05-11T09:16:45Z"
@@ -820,14 +820,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Implemented the first two bullets in Jonas' comment above.  Need more information about the third bullet.",
           "createdAt": "2023-06-13T14:58:22Z",
           "updatedAt": "2023-06-13T14:58:22Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "For \"The channel-separation and selected-cm configuration parameters\r\n\t\t   (or the selected-min-acm/selected-max-acm pair) must address\r\n\t\t   one of the profiles in the list.\";\r\n\r\nAdd:  \"If acm-profile-list is supported then the channel-separation and ...\r\n\r\nUpdate:  Change acm-profile-list to be a YANG feature.  And propose yang.\r\n\r\nAction to team:  Check the list of coding-modulations to validate completeness.",
           "createdAt": "2023-06-15T09:42:26Z",
           "updatedAt": "2023-06-15T09:42:26Z"
@@ -841,7 +841,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "YANG updated to support this issue.",
           "createdAt": "2025-05-15T09:25:33Z",
           "updatedAt": "2025-05-15T09:25:33Z"
@@ -852,7 +852,7 @@
       "number": 14,
       "id": "I_kwDOHLTwws5hvHcc",
       "title": " Capabilities for tx power are not so explanatory",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/14",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/14",
       "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
@@ -865,7 +865,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Close because covered by #13",
           "createdAt": "2023-06-15T09:55:38Z",
           "updatedAt": "2023-06-15T09:55:38Z"
@@ -876,7 +876,7 @@
       "number": 15,
       "id": "I_kwDOHLTwws5j16XY",
       "title": "Supported channel-separation not provided by capabilities",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/15",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/15",
       "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
@@ -889,7 +889,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Close because covered by issue #13",
           "createdAt": "2023-06-15T09:56:12Z",
           "updatedAt": "2023-06-15T09:56:12Z"
@@ -900,7 +900,7 @@
       "number": 16,
       "id": "I_kwDOHLTwws5ldx9R",
       "title": "reference coding modulation in acm mode to be selected",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/16",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/16",
       "state": "OPEN",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -928,14 +928,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "In addition to the referenced-cm attribute in the coding-modulation,\r\nneed an attribute in the acm-profile:  supported-as-reference-modulation: boolean ro.\r\nIdentifies the operative mode which characteristics are used.",
           "createdAt": "2023-05-11T09:33:56Z",
           "updatedAt": "2023-05-11T09:33:56Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "1) What to call referenced-cm\r\n2) Where to put referenced-cm\r\n3) Discuss supported-as-reference-modulation: boolean ro.\r\n\r\n",
           "createdAt": "2023-06-15T09:21:14Z",
           "updatedAt": "2023-06-15T09:21:14Z"
@@ -956,7 +956,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "> 1. What to call referenced-cm\r\n> 2. Where to put referenced-cm\r\n> 3. Discuss supported-as-reference-modulation: boolean ro.\r\n\r\nPoint 1 and 2:\r\nreferenced-cm:  below this number the transmit power can not increase.  Related to the interference calculation.  If referenced-cm is not available, the minimum value is used.\r\nNeed to clarify how this works and how it is related to ATPC.  Need to check internally and provide a suggestion.\r\n\r\nFor point 3, add this as a capability that can be retrieved. ",
           "createdAt": "2023-06-29T10:13:34Z",
           "updatedAt": "2023-06-29T10:13:34Z"
@@ -1033,14 +1033,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "       +--rw (coding-modulation-mode)\r\n       |  +--:(single)\r\n       |  |  +--rw single\r\n       |  |     +--rw selected-cm    identityref\r\n       |  +--:(adaptive)\r\n       |     +--rw adaptive\r\n       |        +--rw selected-min-acm    identityref\r\n       |        +--rw selected-max-acm    identityref\r\n\r\nadd a +--rw reference-modulation identityref\r\ndescription?\r\n\r\n   |     +--ro nominal-tx-capacity?             uint32\r\n       |     +--ro support-as-fixed-modulation?     boolean\r\n\r\nadd a +--ro support-as reference-modulation? boolean\r\ndescription?  Reference Modulation cannot be configured but can be set by the system when support-as-reference-modulation is false.\r\n\r\n",
           "createdAt": "2023-12-14T10:32:06Z",
           "updatedAt": "2023-12-14T10:32:06Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "reference-modulation description:\r\nreference-modulation is a reference to a coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'.",
           "createdAt": "2023-12-14T10:37:24Z",
           "updatedAt": "2023-12-14T10:37:24Z"
@@ -1068,7 +1068,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Suggestion...\n\nReview entire thread and consider how to model precisely what is needed by the standardard regarding what is provided to the operator by the regulator.",
           "createdAt": "2026-05-07T10:19:44Z",
           "updatedAt": "2026-05-07T10:19:44Z"
@@ -1089,14 +1089,14 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "With YANG identities it is possible to define identities for standardized values while allowing each vendor to define identities for vendor-specific values",
           "createdAt": "2026-06-25T09:10:14Z",
           "updatedAt": "2026-06-25T09:10:14Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Change reference-modulation to spectral-efficiency-class and create a new identity that includes the spectral efficiency classes from the table above.  Naming convention...  _1, _2 etc. \nAI: Jonas to suggest descriptions (since the descriptions in the table are misleading).",
           "createdAt": "2026-06-25T09:37:36Z",
           "updatedAt": "2026-06-25T09:37:36Z"
@@ -1145,7 +1145,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Need to understand the ETSI evolution of the ETSI EN 302 217-2 on Spectral Efficiency Class, specifically related to whether Reference modulation index and Spectral efficiency call will be replaced by the modulation scheme.  Action is to reach out to microwave experts that are familiar with the ETSI document.",
           "createdAt": "2026-10-08T09:43:01Z",
           "updatedAt": "2026-10-08T09:43:01Z"
@@ -1166,7 +1166,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Use the Reference Modulation Index from the ETSI table instead of Spectral Efficiency Class or the Reference Modulation Scheme.\n\nModel Reference Modulation Index as an Integer with range of 1-16.\n\nSo move the reference-modulation-index above the choice of coding-modulation-mode making reference-modulation-index a integer rw leaf with range 1-16 (not mandatory).\n",
           "createdAt": "2026-10-15T10:21:15Z",
           "updatedAt": "2026-10-15T10:21:15Z"
@@ -1198,7 +1198,7 @@
       "number": 17,
       "id": "I_kwDOHLTwws5peulr",
       "title": "WG Last call : comments from Tom Petch to be addressed",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/17",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/17",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -1222,7 +1222,7 @@
       "number": 18,
       "id": "I_kwDOHLTwws5vJEH3",
       "title": "Add 'scope' to the yang description.",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/18",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/18",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1239,14 +1239,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Align the YANG module description with the Abstract from RFC 8561 (as modified by the contributors based on the gap analysis).\r\n\r\nCurrently the wording would be...\r\nThis YANG module defines a YANG data model for control and management of\r\n   radio link interfaces and their connectivity to packet (typically\r\n   Ethernet) interfaces in a microwave/millimeter wave node.  The data\r\n   nodes for management of the interface protection functionality is\r\n   broken out into a separate and generic YANG data model in order to\r\n   make it available for other interface types as well.\r\n",
           "createdAt": "2023-08-24T09:27:34Z",
           "updatedAt": "2023-08-24T09:27:34Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Updated ietf-microwave-radio-link.yang with the suggested text for discussion.\n2025-10-03 version.",
           "createdAt": "2025-10-03T15:11:25Z",
           "updatedAt": "2025-10-03T15:11:25Z"
@@ -1257,7 +1257,7 @@
       "number": 19,
       "id": "I_kwDOHLTwws5vKylG",
       "title": "Interaction with ieee-dot1q-bridge model, when microwave is used as VLAN bridge",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/19",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/19",
       "state": "CLOSED",
       "author": "jrebiffe",
       "authorAssociation": "COLLABORATOR",
@@ -1314,28 +1314,28 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "IEEE 802.1 will not add more iftypes to the when statement for the interface augmentation.\r\nSuggest (if desired) to add an informative appendix with instructions on how to augment the Interfaces table.\r\n\r\nOption to create a new augmentation of ianaift.\r\n",
           "createdAt": "2023-12-14T10:49:58Z",
           "updatedAt": "2023-12-14T10:52:27Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "two options:\r\n1) Add a new ianaift (called microwaveRadioLinkTerminalBridged) that is for bridged microwaveRadioLinkTerminal (do this in the iana module, or in our module)\r\n2) Update ianaift in iana to add the base of Bridge to the microwaveRadioLinkTerminal Identity.\r\n3) Add a new identity to our module that is called microwaveRadioLinkTerminalBridged with base of Bridge.\r\n4) create a new module or container in the existing rlt module that ties the microwaveRadioLinkTerminal interface to a bridge port.\r\n\r\nAI:  determine the process to update the iana module with the solution from bullet 2 above.  Then report back.",
           "createdAt": "2024-01-11T11:03:18Z",
           "updatedAt": "2024-01-11T11:03:18Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I agree with the comment from Jonas:\r\n\r\nhttps://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1814190960\r\n\r\nThere are no gaps if the configuration of the virtual ETH interface setup over an RLT interface is provided by the system. The system can instantiate an virtual ETH interface (type = 'ianaift:ethernetCsmacd') and an RLT interface (type = 'ianaift:microwaveRadioLinkTerminal') and provide the association between them using the `higher-layer-if` and `lower-layer-if` leaves, as defined in RFC8343.\r\n\r\nThere is a gap only in the case where the client needs to configure  virtual ETH interface setup over an RLT interface because the `higher-layer-if` and `lower-layer-if` leaves, as defined in RFC8343, are read-only.\r\n\r\nFrom my notes taken during the call with IEEE, I have taken a look at this I-D [draft-ietf-netmod-intf-ext-yang-12](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-intf-ext-yang-12) and noted that the following attribute could be useful to address this gap:\r\n\r\n```\r\nmodule: ietf-if-extensions\r\n  augment /if:interfaces/if:interface:\r\n    +--rw parent-interface if:interface-ref {sub-interfaces}?\r\n\r\n```\r\n\r\nThe only concern is that, in the current YANG model, there is a when statement which is not allowing us to use this attribute with 'ianaift:ethernetCsmacd' interfaces:\r\n\r\n```\r\n  /*\r\n   * Add generic support for sub-interfaces.\r\n   *\r\n   * This should be extended to cover all interface types that are\r\n   * child interfaces of other interfaces.\r\n   */\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from(if:type, 'sub-interface') or\r\n          derived-from-or-self(if:type, 'ianaift:l2vlan') or\r\n          derived-from-or-self(if:type, 'ianaift:atmSubInterface') or\r\n          derived-from-or-self(if:type, 'ianaift:frameRelay')\"  {\r\n      description\r\n        \"Any ianaift:types that explicitly represent sub-interfaces\r\n         or any types that derive from the sub-interface identity.\";\r\n    }\r\n    if-feature \"sub-interfaces\";\r\n\r\n    description\r\n      \"Adds a parent interface field to interfaces that model\r\n       sub-interfaces.\";\r\n    leaf parent-interface {\r\n\r\n      type if:interface-ref;\r\n\r\n      mandatory true;\r\n      description\r\n        \"This is the reference to the parent interface of this\r\n         sub-interface.\";\r\n      reference \"RFC XXXX, Section 2.6 Sub-interface\";\r\n    }\r\n  }\r\n\r\n```\r\n\r\n However, looking at the comment, it seems worthwhile removing the `when` statement to cover any interface type which can potentially be a child interface of other interfaces:\r\n\r\n```\r\n   * This should be extended to cover all interface types that are\r\n   * child interfaces of other interfaces.\r\n\r\n```\r\n\r\nMy proposal is to propose Netmod WG to remove the `when` statement and, if the proposal is accepted, to use this model to resolve this gap\r\n",
           "createdAt": "2024-01-17T11:03:13Z",
           "updatedAt": "2024-01-17T11:03:13Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "> Most of the leaves of the `ianaift:ethernetCsmacd` will be irrelevant: `auto-negotiation`, `speed`, `flow-control`, ... It was said that \"It's not unusual to have irrelevant leaves in models.\"\r\n> \r\n> I am also asking to my Orange colleagues if we have another option.\r\n\r\nLet's review one by one\r\n \r\n### Autonegotiation\r\n\r\nAlso not all the 802.3 interfaces support auto-negotiation. The IEEE YANG model defines the `auto-negotiation` as a presence container:\r\n\r\nhttps://github.com/YangModels/yang/blob/398d5f579fd281a812226450c44fb1566fc18d3d/standard/ieee/published/802.3/ieee802-ethernet-interface.yang#L146-L149\r\n\r\nThis container must not be present for virtual ETH interfaces setup over an RTL interface.\r\n\r\nThe IEEE 802.3 YANG model also describes the behavior to be implemented if the auto-negotiation is configured for an interface that does not support auto-negotiation:\r\n\r\nhttps://github.com/YangModels/yang/blob/398d5f579fd281a812226450c44fb1566fc18d3d/standard/ieee/published/802.3/ieee802-ethernet-interface.yang#L188-L189\r\n\r\nThis requirement also applies to virtual ETH interfaces setup over an RTL interface.\r\n\r\nWithin the `capabilities` container, the system must report to the client that auto-negotiation is not supported by the virtual ETH interfaces setup over an RTL interface.\r\n\r\n### Duplex\r\n\r\nMy understanding is that virtual ETH interfaces setup over an RTL interface are always full duplex.\r\n\r\nIf this is the case, this attribute can always be set to 'full' and any configuration ignored.\r\n\r\nIMHO, it would be nice to have some other leaf (e.g., within the `capabilities` container) reporting to the client the duplex modes supported by a given ETH interface. We might discuss this with IEEE people since this would be useful also for 802.3 interfaces.\r\n\r\n### Flow Control\r\n\r\nMy understanding is that virtual ETH interfaces setup over an RTL interface do not support any 802.3 flow control mechanism.\r\n\r\nFlow control attributes are defined under a couple of features so it is quite straightforward not to support them if they are not supported by all the Ethernet interfaces (including all the local 802.3 ETH interfaces) on the system.\r\n\r\nIf instead, flow control mechanisms are supported for some local 802.3 ETH interfaces, the features must be supported by the system.\r\n\r\nIn this case, the configuration of the flow control mechanisms can be always disabled and any configuration ignored.\r\n\r\nIMHO, it would be nice to have some other leaf (e.g., within the `capabilities` container) reporting to the client the flow control supported by a given ETH interface. We might discuss this with IEEE people since this would be useful also for 802.3 interfaces.\r\n\r\n### Statistics\r\n\r\nAll the counters are defined as optional RO attributes. The system can report only the counters which are supported.",
           "createdAt": "2024-01-17T11:38:36Z",
           "updatedAt": "2024-01-17T11:38:36Z"
@@ -1377,7 +1377,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Based on the discussion during the call on the 18th of January, this issue will be closed.\r\nThere is work underway in the IETF that will help.  See https://datatracker.ietf.org/doc/html/draft-ietf-netmod-intf-ext-yang-12 (Interface Extensions).",
           "createdAt": "2024-01-20T20:36:18Z",
           "updatedAt": "2024-01-20T20:36:18Z"
@@ -1388,7 +1388,7 @@
       "number": 20,
       "id": "I_kwDOHLTwws5zB2Vb",
       "title": "Potential usage of a coding modulation profile list",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/20",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/20",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1410,7 +1410,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Model exists.  Reopen if further discussion needed.",
           "createdAt": "2025-05-15T09:21:45Z",
           "updatedAt": "2025-05-15T09:21:45Z"
@@ -1421,7 +1421,7 @@
       "number": 22,
       "id": "I_kwDOHLTwws53AMHa",
       "title": "ONF Gap Analysis",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/22",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/22",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -1436,35 +1436,35 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "https://github.com/samans/draft-ybam-rfc8561bis/blob/main/presentations/ietf-vs-onf-microwave%26ethernetwired-v03.xlsx",
           "createdAt": "2023-11-16T13:59:36Z",
           "updatedAt": "2023-11-16T13:59:36Z"
         },
         {
           "author": "mamali68",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Since ITU have taken over the core model, The GAP analysis should now be done against the latest Draft of ITU-T G.7711 by SG.15/14. \nLiased version request for IETF. ",
           "createdAt": "2025-02-20T10:35:31Z",
           "updatedAt": "2025-02-20T10:37:41Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "For those with an ITU-T account, the latest draft for consent (2025-03) is here: [TDxxP_G.7711_v4.0.02-clean_for-consent-as-v5.0.docx](https://www.itu.int/ifa/t/2022/sg15/exchange/wp3/q14/G.7711/G.7711_v4.0.02/TDxxP_G.7711_v4.0.02-clean_for-consent-as-v5.0.docx)",
           "createdAt": "2025-02-20T10:36:52Z",
           "updatedAt": "2025-02-20T10:36:52Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "The relevant work in former ONF has now been moved to different places:\n\n- The work on Core Information Model, former ONF TR-512, has been moved to ITU-T G.7711: https://github.com/samans/draft-ybam-rfc8561bis/issues/22#issuecomment-2671103128\n\n- The work on MW Model, former ONF TR-532, has been moved to Linux Foundation ONMI project: https://github.com/Open-Network-Models-and-Interfaces-ONMI/xhaul-home",
           "createdAt": "2025-02-27T10:40:01Z",
           "updatedAt": "2025-02-27T10:40:01Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "2025-03-13\n\nClosed since specific issues have been created to resolve the identified gaps",
           "createdAt": "2025-03-13T10:47:04Z",
           "updatedAt": "2025-03-13T10:47:04Z"
@@ -1475,7 +1475,7 @@
       "number": 23,
       "id": "I_kwDOHLTwws54F5k1",
       "title": "actual-received-level power is absent in topology module",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/23",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/23",
       "state": "CLOSED",
       "author": "jrebiffe",
       "authorAssociation": "COLLABORATOR",
@@ -1497,14 +1497,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Wait for mw-topo to publish, then work on a bis.",
           "createdAt": "2023-12-14T10:56:53Z",
           "updatedAt": "2023-12-14T10:56:53Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Move discussion to CCAMP list for topology enhancement.",
           "createdAt": "2024-10-10T09:37:11Z",
           "updatedAt": "2024-10-10T09:37:11Z"
@@ -1515,7 +1515,7 @@
       "number": 24,
       "id": "I_kwDOHLTwws54F8a4",
       "title": "Duplication of link information in topology model",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/24",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/24",
       "state": "CLOSED",
       "author": "jrebiffe",
       "authorAssociation": "COLLABORATOR",
@@ -1537,14 +1537,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Wait for mw-topo to publish, then work on a bis.",
           "createdAt": "2023-12-14T10:56:39Z",
           "updatedAt": "2023-12-14T10:56:39Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Move discussion to CCAMP list for topology enhancement.",
           "createdAt": "2024-10-10T09:37:00Z",
           "updatedAt": "2024-10-10T09:37:00Z"
@@ -1555,7 +1555,7 @@
       "number": 25,
       "id": "I_kwDOHLTwws54THDI",
       "title": "Feature: radio-signal-id (Trail trace identifier (TTI))",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/25",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1588,7 +1588,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Review the models from ITU-T Q14.  Suggest moving this feature to if-ext draft.\r\n\r\nHow does this apply to microwave?  Is there an example that could be added in the Radio Link Draft?\r\nIn microwave, this feature would be used to determine if the radio on one side is talking to the expected radio on the other side.\r\n\r\nFurther discussion on the formatting of the ids is needed.\r\n\r\n",
           "createdAt": "2024-02-08T10:49:03Z",
           "updatedAt": "2024-02-08T10:49:03Z"
@@ -1609,14 +1609,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Move this to the issue list of the ietf interface extensions work (netmod).\r\nhttps://datatracker.ietf.org/doc/html/draft-ietf-netmod-intf-ext-yang",
           "createdAt": "2024-04-04T09:35:48Z",
           "updatedAt": "2024-04-04T09:35:48Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Review this again, and add as microwave specific extension.",
           "createdAt": "2024-10-10T09:31:05Z",
           "updatedAt": "2024-10-10T09:31:05Z"
@@ -1637,7 +1637,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-03-13 Call**\n\nAgreed to re-use the exiting RLT and CT id attributes to configure the transmitted value\n\nIntegers can be encoded as strings\n\nThe transmission of the identifiers can be disabled by not configuring the RLT and CT id attributes\n\nNeed to add two new attributes\n1. expected value (by default the expected value is the same as the transmitted value)\n2. enable/disable the transmission of the identifier\n\nNo need to report the received value.\n\n---\n\nNote: the other attributes in the https://github.com/samans/draft-ybam-rfc8561bis/issues/25#issuecomment-1909778812 proposal cover different features and are not considered for radio-signal-id feature:\n\n```\n  augment /if:interfaces/if:interface:\n       +--rw rx-enabled?         boolean\n       +--ro rx-oper-status?     oper-status\n       +--rw cryptographic {cryptographic}?\n       |  +--rw enabled?             boolean\n       |  +--rw symmetric-key-ref    ks:central-symmetric-key-ref\n```\n",
           "createdAt": "2025-03-13T10:28:05Z",
           "updatedAt": "2025-03-13T10:29:12Z"
@@ -1662,7 +1662,7 @@
       "number": 26,
       "id": "I_kwDOHLTwws58V2He",
       "title": "air-interface:receiver-is-on",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/26",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/26",
       "state": "OPEN",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1694,7 +1694,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Use tx-oper-status as template for rx-oper-status.  Create a type for txrx-oper-status...?  naming tbd.\r\n\r\nAdd a grouping to the augmentation for tx like was done for rx.\r\n",
           "createdAt": "2024-02-08T10:56:57Z",
           "updatedAt": "2024-02-08T10:56:57Z"
@@ -1722,7 +1722,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "> In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\n> \n> **Proposed solution:**\n> \n> Add in the augmentation to the ietf-interface the following parameters\n> \n> ```\n>   |     +--rw mrl:rx-enabled?                     boolean\n>   |     +--ro mrl:rx-oper-status?                 enumeration\n> ```\n\nThis addition can be made.  The space diversity issue will be moved to a new issue. ",
           "createdAt": "2026-03-05T10:39:43Z",
           "updatedAt": "2026-03-05T10:39:43Z"
@@ -1736,7 +1736,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Wait on pull request #62.\nGet other opinions from equipment vendors.\n\nDo we need to add a feature that indicates a receiver can be enabled/disabled?\nNote that rx-enabled can only be disabled when there is more than one receiver (in certain hardware configurations).  \n\nCreate a grouping that is available when a feature is identified?\n\n",
           "createdAt": "2026-05-07T09:21:08Z",
           "updatedAt": "2026-05-07T09:44:02Z"
@@ -1747,7 +1747,7 @@
       "number": 27,
       "id": "I_kwDOHLTwws58V4fZ",
       "title": "air-interface:alic-is-on",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/27",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/27",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1767,7 +1767,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Closed at 2024-01-18 meeting.",
           "createdAt": "2024-01-20T20:39:09Z",
           "updatedAt": "2024-01-20T20:39:09Z"
@@ -1778,7 +1778,7 @@
       "number": 28,
       "id": "I_kwDOHLTwws59GR0D",
       "title": "MW-Link encryption",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/28",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/28",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1800,7 +1800,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "https://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/34/\r\nand\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-keystore/\r\nAre in the RFC Editor's queue.  So will be RFCs before the radio-link bis is finished.\r\n\r\nValidate that the new modules are sufficient for radio-link-bis\r\n\r\n",
           "createdAt": "2024-10-10T09:52:07Z",
           "updatedAt": "2024-10-10T09:52:07Z"
@@ -1814,21 +1814,21 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "\"YANG Data Types and Groupings for Cryptography\" https://datatracker.ietf.org/doc/rfc9640/ is now an RFC",
           "createdAt": "2025-01-16T10:43:59Z",
           "updatedAt": "2025-01-16T10:43:59Z"
         },
         {
           "author": "mamali68",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "The Issue can be closed with Reference to RFC9640 ",
           "createdAt": "2025-02-06T10:48:54Z",
           "updatedAt": "2025-02-06T10:48:54Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "The Issue can be closed with Reference to RFC9640",
           "createdAt": "2025-02-06T10:49:27Z",
           "updatedAt": "2025-02-06T10:49:27Z"
@@ -1846,7 +1846,7 @@
       "number": 29,
       "id": "I_kwDOHLTwws59GfC6",
       "title": "air-interface:loop-back-kind-on",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/29",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/29",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1875,7 +1875,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Here is an SVG of the diagram we were talking about.  See if I got it right and if you like the formatting.  I started with ascii art and used aasvg to generate the SVG, so this will work in text and html/pdf versions.\r\n\r\n![loopback](https://github.com/samans/draft-ybam-rfc8561bis/assets/8321265/7df1cb48-96c0-4535-b3b4-7651dc2f5534)\r\n\r\nTo resolve the use of ietf-if-extensions, we can evaluate the use of the loopback, but we need two loopbacks for one interface and the extension draft doesn't currently support that.",
           "createdAt": "2024-02-01T19:31:46Z",
           "updatedAt": "2024-02-01T19:31:46Z"
@@ -1889,21 +1889,21 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "I think I see your point.  The point is there is one ietf-interface that has more than one loopback.  That might be a different picture, there is only so much room with 72 character ascii.  I propose something that shows the lines like Jonas put in his sketch.",
           "createdAt": "2024-02-02T12:33:54Z",
           "updatedAt": "2024-02-02T12:33:54Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "> To resolve the use of ietf-if-extensions, we can evaluate the use of the loopback, but we need two loopbacks for one interface and the extension draft doesn't currently support that.\r\n\r\nWhile it is true that `ietf-if-extensions` does not support two loopbacks for one interface, IMHO, it would be possible to either:\r\n1. update `ietf-if-extensions` to fix the issue in a generic way; \r\n2. provide some augmentations to the `ietf-if-extensions` in RFC8561-bis to resolve the gap for RLT interfaces\r\n\r\nWhile exploring these options would have been my preference if we were defining the first version of RFC8561, considering that the `rf-loop` and `if-loop` are already defined in RFC8561, I think that before exploring these options, we need to check whether we agree on the value of deprecating the current solution in RFC8561-bis to reuse the `ietf-if-extensions`.\r\n\r\nIf there is no agreement to deprecate the current solution in RFC8561, IMHO, we simply focus this issue on providing more clarification text in RFC8561-bis on how to use these two attributes and forget about the loopback definition in `ietf-if-extensions`.\r\n\r\nMy 2 cents\r\n\r\nItalo",
           "createdAt": "2024-02-02T21:03:17Z",
           "updatedAt": "2024-02-02T21:05:45Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "I think it might be worth fixing ietf-if-extensions anyway.  I can talk to\r\nRob Wilton (the other author).  Then we can decide if we want to deprecate\r\nrf-loop and if-loop.   Although, we will still need some kind of diagram.\r\n\r\n\r\nOn Fri, Feb 2, 2024 at 4:03\u202fPM italobusi ***@***.***> wrote:\r\n\r\n> To resolve the use of ietf-if-extensions, we can evaluate the use of the\r\n> loopback, but we need two loopbacks for one interface and the extension\r\n> draft doesn't currently support that.\r\n>\r\n> While it is true that ietf-if-extensions does not support two loopbacks\r\n> for one interface, IMHO, it would be possible to either:\r\n>\r\n>    1. update ietf-if-extensions to fix the issue in a generic way;\r\n>    2. provide some augmentations to the ietf-if-extensions in RFC8561-bis\r\n>    to resolve the gap for RLT interfaces\r\n>\r\n> While exploring these options would have been my preference if we were\r\n> defining the first version of RFC8561, considering that the rf-loop and\r\n> if-loop are already defined in RFC8561, I think that before exploring\r\n> these options, we need to check whether we agree on the value of\r\n> deprecating the current solution in RFC8561-bis to reuse the\r\n> ietf-if-extensions.\r\n>\r\n> If there is no agreement to deprecate the current solution in RFC8561,\r\n> IMHO, we can close the issue since the rf-loop and if-loop data nodes\r\n> defined in RFC8561 are fulfilling the requirements.\r\n>\r\n> My 2 cents\r\n>\r\n> Italo\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/29#issuecomment-1924692842>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB7PR4JRLOMSNZS4ST76ITTYRVICDAVCNFSM6AAAAABCJHJMVCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTSMRUGY4TEOBUGI>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n",
           "createdAt": "2024-02-02T21:23:37Z",
           "updatedAt": "2024-02-02T21:23:37Z"
@@ -1917,14 +1917,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Adding the documentation will make the if-loop and rf-loop easier to\r\nunderstand.\r\n\r\nOn Mon, Feb 5, 2024 at 5:55\u202fAM DanielaSpreafico ***@***.***>\r\nwrote:\r\n\r\n> My side I prefer to take as it is the the current solution in RFC8561. The\r\n> loopback is correct and enough.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/29#issuecomment-1926711913>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB7PR4L3EI2QWBRNZS7455LYSC3CBAVCNFSM6AAAAABCJHJMVCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTSMRWG4YTCOJRGM>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n",
           "createdAt": "2024-02-05T11:14:48Z",
           "updatedAt": "2024-02-05T11:14:48Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Add documentation, use diagram and keep the loopback as defined in the RFC.",
           "createdAt": "2024-02-08T10:23:58Z",
           "updatedAt": "2024-02-08T10:23:58Z"
@@ -1935,7 +1935,7 @@
       "number": 30,
       "id": "I_kwDOHLTwws59GkUG",
       "title": "air-interface:maintenance-timer",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/30",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/30",
       "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
@@ -1968,7 +1968,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-01-30 Weekly Call**\n\nAlternative solution could be to define an action to set the interface in maintenance mode, configuring the duration of the maintenance window\n\nAs a consequence of this action, the operational DS can report whether the interface is in maintenance mode or not\n\nNeed more investigation about what the different vendors are implementing\n\nFor further discussion in the next calls\n",
           "createdAt": "2025-01-30T11:00:41Z",
           "updatedAt": "2025-01-30T11:00:41Z"
@@ -1982,21 +1982,21 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Italo contacting the authors of [draft-ietf-netmod-schedule-yang-07](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang/), to understand how the scheduling process impacts the datastores when using NMDA. ",
           "createdAt": "2025-06-19T09:18:03Z",
           "updatedAt": "2025-06-19T09:18:03Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "The schedule draft is now at version -10.  The link to datatracker: https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang/\n",
           "createdAt": "2025-11-20T10:26:45Z",
           "updatedAt": "2025-11-20T10:26:45Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "The I-D is now published as [RFC 9922](https://datatracker.ietf.org/doc/html/rfc9922)\n\nThe grouping in section 3.3.2 seems applicable to this requirement",
           "createdAt": "2026-03-26T09:30:06Z",
           "updatedAt": "2026-03-26T09:30:06Z"
@@ -2017,7 +2017,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "The slides developed during the discussion today: [tx-maintenance-period-00.pptx](https://github.com/user-attachments/files/32334041/tx-maintenance-period-00.pptx)",
           "createdAt": "2026-09-17T11:09:49Z",
           "updatedAt": "2026-09-17T11:09:49Z"
@@ -2045,14 +2045,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "[tx-timer-period-useCase-00.pptx](https://github.com/user-attachments/files/33196322/tx-timer-period-useCase-00.pptx)\n\nFrom Daniela",
           "createdAt": "2026-10-08T09:15:44Z",
           "updatedAt": "2026-10-08T09:15:44Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "This capability is already supported by native NETCONF/YANG 1.1 primitives; therefore, no changes to the model are required to support it.",
           "createdAt": "2026-10-08T09:37:05Z",
           "updatedAt": "2026-10-08T09:37:05Z"
@@ -2063,7 +2063,7 @@
       "number": 31,
       "id": "I_kwDOHLTwws59zjiY",
       "title": "Tx Power min in ATPC ",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/31",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/31",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -2078,14 +2078,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "add minimum-nominal-power  power  to atpc.",
           "createdAt": "2024-09-05T09:27:10Z",
           "updatedAt": "2024-09-05T09:27:10Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "YANG issue has been merged. So close this issue",
           "createdAt": "2025-01-09T10:08:47Z",
           "updatedAt": "2025-01-09T10:08:47Z"
@@ -2096,7 +2096,7 @@
       "number": 32,
       "id": "I_kwDOHLTwws5_UkFM",
       "title": "Ethernet compression on Radio Link",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/32",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/32",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -2128,21 +2128,21 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Instead of boolean, one option is to use an IdentityRef.  We define the base in the radio-link module, and allow/describe how to add identityrefs for the vendor specific compress algorithms.",
           "createdAt": "2024-02-22T10:36:49Z",
           "updatedAt": "2024-02-22T10:36:49Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Need to provide the options for modeling.  Some implementations have multiple compression options per interface.\r\n\r\nHow to identify that the node has the ability to support compression?",
           "createdAt": "2024-02-22T10:46:27Z",
           "updatedAt": "2024-02-22T10:46:27Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Please provide suggested yang for compression modes for RLT/CT for discussion.",
           "createdAt": "2024-10-10T10:01:14Z",
           "updatedAt": "2024-10-10T10:01:14Z"
@@ -2188,10 +2188,10 @@
       "number": 33,
       "id": "I_kwDOHLTwws6AFkqd",
       "title": "Hardware model",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/33",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/33",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "jrebiffe"
       ],
@@ -2206,7 +2206,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Here is the complete set of YANG.  Look at the directory .\\yang-TR-383-v1.7.0.zip\\yang-TR-383-v1.7.0\\standard\\equipment\r\nhttps://github.com/BroadbandForum/yang/archive/refs/tags/TR-383-v1.7.0.zip",
           "createdAt": "2024-02-22T12:20:39Z",
           "updatedAt": "2024-02-22T12:20:39Z"
@@ -2227,7 +2227,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "One doubt on my side: do we need to represent in the hardware inventory ODU/IDU chassis type or just use the chassis component class for both? Is there something specific which is needed to differentiated ODU and IDU chassis, other than they location?\r\n\r\nFrom the figure, it seems that the relationship between IDU and ODUs is similar to the relationship between a main shelf and the sub-shelves in optical NEs.\r\n\r\nRegarding the modelling of the ports and of the intra-NE cables, there are few open issues in IVY WG:\r\n- https://github.com/ietf-ivy-wg/network-inventory-yang/issues/45\r\n- https://github.com/ietf-ivy-wg/network-inventory-yang/issues/32\r\n\r\nI think it would be good if we keep alignment with the on-going work in IVY WG\r\n",
           "createdAt": "2024-05-09T08:54:47Z",
           "updatedAt": "2024-05-09T08:54:47Z"
@@ -2255,14 +2255,14 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "See also: https://github.com/ietf-ivy-wg/network-inventory-yang/issues/64\r\n\r\nSee also some previous discussions in https://github.com/ietf-ccamp-wg/ietf-network-inventory/issues/6 which has been closed as superseded by https://github.com/ietf-ivy-wg/network-inventory-yang/issues/64",
           "createdAt": "2024-09-19T10:25:10Z",
           "updatedAt": "2024-09-19T10:25:10Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Continue the discussion in IVY.",
           "createdAt": "2024-10-10T09:36:16Z",
           "updatedAt": "2024-10-10T09:36:16Z"
@@ -2273,7 +2273,7 @@
       "number": 34,
       "id": "I_kwDOHLTwws6M5c5W",
       "title": "How to identify the Name of Equipment and the Sw Release for MW nodes?",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/34",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/34",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -2301,10 +2301,10 @@
       "number": 35,
       "id": "I_kwDOHLTwws6VciTp",
       "title": "microwave-types move groupings",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/35",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/35",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
         "review - pull request"
@@ -2316,7 +2316,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Merged, close issue",
           "createdAt": "2025-01-09T10:09:24Z",
           "updatedAt": "2025-01-09T10:09:24Z"
@@ -2327,10 +2327,10 @@
       "number": 37,
       "id": "I_kwDOHLTwws6YzWyp",
       "title": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/37",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/37",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "samans"
       ],
@@ -2344,14 +2344,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "I will fix this when we move to working group adoption",
           "createdAt": "2025-04-04T10:18:41Z",
           "updatedAt": "2025-04-04T10:18:41Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Added example: to ids and names, fixed the json so it will validate using yanglint.\nIn the 2025-10-03 version.",
           "createdAt": "2025-10-03T15:07:55Z",
           "updatedAt": "2025-10-03T15:07:55Z"
@@ -2362,10 +2362,10 @@
       "number": 39,
       "id": "I_kwDOHLTwws6aoQCV",
       "title": "Identity base for coding-modulation in microwave-types",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/39",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/39",
       "state": "CLOSED",
       "author": "mamali68",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
         "agreed"
@@ -2384,7 +2384,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "When an identityref is defined, any identity derived from the specified base is valid (and the derivation of identities is transitive, as described in RFC 7950)\r\n\r\nConsidering your example:\r\n\r\n```\r\nidentity coding-modulation {\r\n    description\r\n      \"The coding and modulation schemes.\";\r\n  }\r\n[...]\r\n  identity qam-256 {\r\n    base coding-modulation;\r\n    description\r\n      \"256 QAM coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-strong {\r\n    base qam-256;\r\n    description\r\n      \"256 QAM strong coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-light {\r\n    base qam-256;\r\n    description\r\n      \"256 QAM light coding and modulation scheme.\";\r\n  }\r\n```\r\n\r\nThe values qam-256, qam-256-strong and qam-256-light are valid for the following identityref:\r\n\r\n```\r\n     type identityref {\r\n       base \"coding-modulation\";\r\n     }\r\n```\r\n\r\nHowever, only the values qam-256-strong and qam-256-light (and not the value qam-256) are valid for the following identityref:\r\n\r\n```\r\n     type identityref {\r\n       base \"qam-256\";\r\n     }\r\n```\r\n",
           "createdAt": "2024-10-24T09:48:16Z",
           "updatedAt": "2024-10-24T09:49:46Z"
@@ -2395,10 +2395,10 @@
       "number": 42,
       "id": "I_kwDOHLTwws6jN2sk",
       "title": "Default values for data nodes added in this revision",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/42",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/42",
       "state": "CLOSED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [
         "italobusi"
       ],
@@ -2410,14 +2410,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "What is an example of adding a default statement to an existing leaf in the radio-link yang?  Trying to understand what problem is being identified.  Can we specifically ask the YANG doctors?  Do the updated YANG guidelines help?",
           "createdAt": "2025-01-09T10:33:39Z",
           "updatedAt": "2025-01-09T10:33:39Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I think that for the scope of this model we can close this issue\n\nThe issue has been triggered by the first proposal in https://github.com/samans/draft-ybam-rfc8561bis/pull/40 where a default value   False was defined for the header-compression-enabled but is is no longer applicable because we have agreed not to define any default value for enabling/disabling header compression\n\nThe generic issue is still valid but no longer applicable for this model",
           "createdAt": "2025-05-15T11:32:15Z",
           "updatedAt": "2025-05-15T11:32:15Z"
@@ -2428,10 +2428,10 @@
       "number": 43,
       "id": "I_kwDOHLTwws6mbyjF",
       "title": "add minimum-nominal-power to rtpc and consolidate nominal-limits in a grouping",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/43",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/43",
       "state": "CLOSED",
       "author": "mamali68",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "mamali68"
       ],
@@ -2443,21 +2443,21 @@
       "comments": [
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-01-30 Weekly Call**\n\n> Since minimum-nominal-power is a system capability of the radio it is needed in case of remote control as well, to maintain backward-compatibility, the suggestion is that it should be added to container rtpc as well.\n\nFor atpc, the minimum-nominal-power and maximum-nominal-power are not capability but the configuration of the range within which the atcp algorithm should select the actual output power.\n\nFor rtpc, there is no need to configure the minimum-nominal-power because the actual output power is set to the configure maximum-nominal-power.\n",
           "createdAt": "2025-01-30T10:30:15Z",
           "updatedAt": "2025-01-30T10:30:15Z"
         },
         {
           "author": "mamali68",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "after studying the ETSI standards and also comparing to the old ONF core model, i realized the naming was the confusing part for me. this issue can be closed. ",
           "createdAt": "2025-02-20T15:49:35Z",
           "updatedAt": "2025-02-20T15:49:35Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-02-27 Call**\n\nAgreed to close the issue with no actions",
           "createdAt": "2025-02-27T10:56:13Z",
           "updatedAt": "2025-02-27T10:56:13Z"
@@ -2468,7 +2468,7 @@
       "number": 44,
       "id": "I_kwDOHLTwws6pCxvR",
       "title": "Pyang reports warnings about the IETF Trust Copyright statement.",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/44",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/44",
       "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
@@ -2485,14 +2485,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "This is on the yang file that hasn't changed since 2024.  I will fix this when we move to working group adoption.",
           "createdAt": "2025-04-04T10:17:34Z",
           "updatedAt": "2025-04-04T10:17:34Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Updated in 2025-10-03 Version.",
           "createdAt": "2025-10-03T14:23:36Z",
           "updatedAt": "2025-10-03T14:23:36Z"
@@ -2503,10 +2503,10 @@
       "number": 45,
       "id": "I_kwDOHLTwws6r59Ly",
       "title": "New attributes for bonding and BCA",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/45",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/45",
       "state": "CLOSED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "**2025-02-27 Call**\n\nDiscuss the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members?  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nSee: https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx\n",
@@ -2516,14 +2516,14 @@
       "comments": [
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-03-06 Call**\n\nThe proposed new attributes are applicable to bonding within a single NE (as currently supported by RFC8561) as well as to BCA across multiple NEs (as planned to be updated in #2)\n\nConcerns raised during the call:\n- the RLT is supposed to be up as long as there is at least one carrier up \n- a carrier can be added to the group as soon as it recovers since, as opposed to the protection configuration, there is no flapping condition affecting the other carrier(s)\n\nOverall concern is whether adding these two attributes is going to change the definition of what is meant by bonding: need to check also with ETSI references",
           "createdAt": "2025-03-06T10:49:00Z",
           "updatedAt": "2025-03-06T11:01:12Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-03-13**\n\nThese two attributes can be defined in vendor-specific augmentations and no need to standardize them",
           "createdAt": "2025-03-13T10:38:55Z",
           "updatedAt": "2025-03-13T10:38:55Z"
@@ -2534,10 +2534,10 @@
       "number": 46,
       "id": "I_kwDOHLTwws6s3o0t",
       "title": "XPIC over multiple nodes",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/46",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/46",
       "state": "OPEN",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [
         "italobusi"
       ],
@@ -2554,14 +2554,14 @@
       "comments": [
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-03-06 Call**\n\nNeed to investigate the pros&cons of the two options for defining the new `twin-member` (i.e., interface reference or string)",
           "createdAt": "2025-03-06T12:26:06Z",
           "updatedAt": "2025-03-06T12:26:06Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "**2025-03-13 Call**\n\nThe string can be useful in implementations where the link used is not managed as an interface (according to RFC8343)\n\nIn case the link is managed as an interface, the string can report the interface name.\n",
           "createdAt": "2025-03-13T10:43:27Z",
           "updatedAt": "2025-03-13T10:43:27Z"
@@ -2579,7 +2579,7 @@
       "number": 48,
       "id": "I_kwDOHLTwws66t5DK",
       "title": "Wrong enumeration values for oper-status of header-compression",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/48",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/48",
       "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
@@ -2592,7 +2592,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Leave values as on/off to match tx-oper-status.",
           "createdAt": "2025-06-19T09:26:34Z",
           "updatedAt": "2025-06-19T09:26:34Z"
@@ -2603,7 +2603,7 @@
       "number": 49,
       "id": "I_kwDOHLTwws7R33k8",
       "title": "New Coding Modulation value to cover new modulation value.",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/49",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/49",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -2639,10 +2639,10 @@
       "number": 50,
       "id": "I_kwDOHLTwws7ZW3Jb",
       "title": "Rename draft name to target it to CCAMP WG",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/50",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/50",
       "state": "CLOSED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [
         "samans",
         "italobusi"
@@ -2657,7 +2657,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "draft-ybam-ccamp-rfc8561bis-00",
           "createdAt": "2025-12-18T10:18:40Z",
           "updatedAt": "2025-12-18T10:18:40Z"
@@ -2668,10 +2668,10 @@
       "number": 51,
       "id": "I_kwDOHLTwws7h5HWh",
       "title": "Updating Danilo mail address",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/51",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/51",
       "state": "CLOSED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [
         "niloda"
       ],
@@ -2686,7 +2686,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "mailto:Danilo.Pala@TechMahindra.com\n\nTech Mahindra",
           "createdAt": "2026-02-26T10:57:00Z",
           "updatedAt": "2026-02-26T10:57:00Z"
@@ -2697,10 +2697,10 @@
       "number": 55,
       "id": "I_kwDOHLTwws7mPbt4",
       "title": "Clean-up YANG revision statements",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/55",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/55",
       "state": "CLOSED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "See the guidelines in [RFC 8407-bis](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis#name-module-header-meta-and-revi)",
@@ -2713,10 +2713,10 @@
       "number": 56,
       "id": "I_kwDOHLTwws7txeMV",
       "title": "IETF 125 Cleanup Notes",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/56",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/56",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "[Repository Home](https://github.com/samans/draft-ybam-rfc8561bis/)\n[Editor's Home](https://samans.github.io/draft-ybam-rfc8561bis/ )\n\n2025-02-25\n - Deal with Pull request 1 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete (orange dot to green checkmark)\n - Deal with Pull request 2 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete\n - Issue #50 (Rename the draft) \u2013 done in github and then pulled to local\n   - Github edit of draft-ybam-rfc8561bis.md to rename to draft-ybam-ccamp-rfc8561bis.md\n     - Need to change the docname statement in the markdown file.\n   - Retrieve environment from github\n     - git pull\n     - Fix .gitignore file to ignore\n       - pretty/\n       - old/\n       - *.bash\n  - Fix the tooling on the local git to support the new tooling \u2013 local\n    - Important note: Ubuntu 24.04 LTS is recommended, 20.04 LTS doesn\u2019t have the ruby support needed.\n    - Install ruby\n      - sudo apt install ruby \n    - Install [cabo/kramdown-rfc: An XML2RFC (RFC799x) backend for Thomas Leitner's kramdown markdown parser](https://github.com/cabo/kramdown-rfc)\n      - sudo gem install kramdown-rfc\n    - Install xml2rfc\n      - sudo apt install xml2rfc\n    - Delete \u2018lib/.venv\u2019 from local git repository\n      - Run make which should recreate the \u2018lib/.venv\u2019 environment.\n  - Add compile checks and pretty printing\n    - If environment isn\u2019t configured\u2026\n      - Python3 -m venv ~/venv  ## This creates a virtual environment, put the environment wherever you want (this one is in my home directory and called venv)\n        - source ~/venv/bin/activate  ## This activates the virtural environment\n      - pip3 install setuptools\n      - pip3 install pyang\n\n2025-02-26 (done)\n  - Issue #55 (yang revision statements)\n  - Issue #51 (Danilo\u2019s email)\n  - Markdown generation of svg from ascii art\n    - use ~~~~ aasvg as the instruction for figures to automatically change from ascii art to svg.\n  - Markdown folding\n    - Use ::include for yang (since yang needs to be manually folded)\n    - Use ::include-fold for json and trees\n\n2026-02-27\n  - Create a file with all the revision statements and request comments on what to put there.\n  - Update the compile.bash script to do the diff against old, add context to the diff.\n  - Generate a new draft\n\n2026-03-02\n  - Use \"make next\" to make a versioned folder for idnits checking\n  - Tag the release in github using the draft-name as the tag name and release name (including the version).\n  - Submit the draft",
@@ -2726,7 +2726,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "### ietf-interface-protection\n```\n  revision 2026-02-26 {\n    description\n      \"Canonical Order and copyright updated\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-10-03 {\n    description\n      \"Draft - Issue #44 Copyright statement Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2024-03-03 {\n    description\n      \"Updating reference to RFC XXXX. - pretty printing\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2020-10-06 {\n    description\n      \"Updating reference to RFC XXXX.\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2019-06-19 {\n    description\n      \"Initial revision.\";\n    reference\n      \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n  }\n```\n\n### ietf-microwave-radio-link\n\n```\n revision 2026-02-26 {\n   description\n     \"TBD\";\n   reference\n     \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n }\n revision 2026-01-15 {\n    description\n      \"Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-10-03 {\n    description\n      \"Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-04-04 {\n    description\n      \"Draft - Issue #32 Compression,\n               Issue #35 grouping common-microwave-properties,\n               Issue #31 added minimum-nominal-power\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2019-06-19 {\n    description\n      \"Initial revision.\";\n    reference\n      \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n  }\n```\n\n### ietf-microwave-types\n\n```\n  revision 2026-02-26 {\n    description\n      \"Coding Modulation value to cover new modulation value.\n       New rlt-mode grouping to remove duplication.\n      \";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-10-03 {\n    description\n      \"Draft - Issue #44 Copyright statement Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-04-04 {\n    description\n      \"Draft - Comression #32, new grouping Issue #35\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2019-06-19 {\n    description\n      \"Initial revision.\";\n    reference\n      \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n  }\n```",
           "createdAt": "2026-03-02T12:23:15Z",
           "updatedAt": "2026-03-02T12:23:15Z"
@@ -2737,7 +2737,7 @@
       "number": 57,
       "id": "I_kwDOHLTwws7uF075",
       "title": "Ethernet loopback for Carrier Termination",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/57",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/57",
       "state": "OPEN",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -2750,7 +2750,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Research whether a way to do this is supported by an existing IETF RFC or Draft.",
           "createdAt": "2026-03-05T10:43:49Z",
           "updatedAt": "2026-03-05T10:43:49Z"
@@ -2761,10 +2761,10 @@
       "number": 58,
       "id": "I_kwDOHLTwws7vF3g0",
       "title": "Backward Compatibility Checking",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/58",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/58",
       "state": "OPEN",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Review this:\ncheck BC changes from ietf-microwave-radio-link@2019-06-19:\nietf-microwave-radio-link.yang:1: error: the typedef 'power', defined at old/ietf-microwave-radio-link@2019-06-19.yang:91 is illegally removed\nietf-microwave-radio-link.yang:1: error: the leaf 'mode', defined at old/ietf-microwave-radio-link@2019-06-19.yang:119 is illegally removed\nietf-microwave-radio-link.yang:507: error: the mandatory node minimum-nominal-power is illegally added\nietf-microwave-types.yang:433: error: the base 'mw-types:coding-modulation' is illegally added",
@@ -2774,7 +2774,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "> Review this: check BC changes from ietf-microwave-radio-link@2019-06-19: ietf-microwave-radio-link.yang:1: error: the typedef 'power', defined at old/[ietf-microwave-radio-link@2019-06-19.yang](mailto:ietf-microwave-radio-link@2019-06-19.yang):91 is illegally removed\n\n- Add power back into the ietf-microwave-radio-link module and deprecate it, add a note that the power in ietf-microwave-types modules should be used instead.\n\n> ietf-microwave-radio-link.yang:1: error: the leaf 'mode', defined at old/[ietf-microwave-radio-link@2019-06-19.yang](mailto:ietf-microwave-radio-link@2019-06-19.yang):119 is illegally removed\n\n- semantically the move of mode to a choice is backward compatible at an instance level, not at the schema level.  This was intentional.\n\n> ietf-microwave-radio-link.yang:507: error: the mandatory node minimum-nominal-power is illegally added\n\n- remove mandatory, since we added a default.\n\n> ietf-microwave-types.yang:433: error: the base 'mw-types:coding-modulation' is illegally added\n\n- review again after other changes are made.  Not sure why this is showing an error in the mw-types file.\n\n",
           "createdAt": "2026-03-05T10:29:11Z",
           "updatedAt": "2026-03-05T10:29:11Z"
@@ -2785,10 +2785,10 @@
       "number": 59,
       "id": "I_kwDOHLTwws7vF43t",
       "title": "Update the Revision Statements",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/59",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/59",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "> ### ietf-interface-protection\n> ```\n>   revision 2026-02-26 {\n>     description\n>       \"Canonical Order and copyright updated\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2024-03-03 {\n>     description\n>       \"Updating reference to RFC XXXX. - pretty printing\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2020-10-06 {\n>     description\n>       \"Updating reference to RFC XXXX.\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ```\n> \n> ### ietf-microwave-radio-link\n> \n> ```\n>  revision 2026-02-26 {\n>    description\n>      \"TBD\";\n>    reference\n>      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>  }\n>  revision 2026-01-15 {\n>     description\n>       \"Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-04-04 {\n>     description\n>       \"Draft - Issue #32 Compression,\n>                Issue #35 grouping common-microwave-properties,\n>                Issue #31 added minimum-nominal-power\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ```\n> \n> ### ietf-microwave-types\n> \n> ```\n>   revision 2026-02-26 {\n>     description\n>       \"Coding Modulation value to cover new modulation value.\n>        New rlt-mode grouping to remove duplication.\n>       \";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-04-04 {\n>     description\n>       \"Draft - Comression #32, new grouping Issue #35\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ``` \n\n _Originally posted by @samans in [#56](https://github.com/samans/draft-ybam-rfc8561bis/issues/56#issuecomment-3984064041)_",
@@ -2798,7 +2798,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Updated by pull request 2026-10-refresh",
           "createdAt": "2026-10-29T15:26:38Z",
           "updatedAt": "2026-10-29T15:26:38Z"
@@ -2809,10 +2809,10 @@
       "number": 60,
       "id": "I_kwDOHLTwws7vIcA7",
       "title": "Fix md file to get yang trees from yang directory",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/60",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/60",
       "state": "CLOSED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix the .md file to get yang trees from yang directory and delete the trees directory.\n\nThe trees are generated by the compile.bash script and stored in the yang/ directory.\n",
@@ -2822,7 +2822,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "2026-10 pull request",
           "createdAt": "2026-10-29T15:22:15Z",
           "updatedAt": "2026-10-29T15:22:15Z"
@@ -2833,7 +2833,7 @@
       "number": 61,
       "id": "I_kwDOHLTwws7wHaKj",
       "title": "Space Diversity Combiner (SDC) functionality",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/61",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/61",
       "state": "OPEN",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -2864,12 +2864,13 @@
       "number": 63,
       "id": "I_kwDOHLTwws8AAAABB9QQ0g",
       "title": "rlt-mode in conflict with YANG principles",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/63",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/63",
       "state": "OPEN",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "samans"
+        "samans",
+        "italobusi"
       ],
       "labels": [],
       "body": "YANG principles state that configuration of one leaf shall not impact the configuration of other leafs, which is the case for rlt-mode and the configuration of the members in carrier-terminations & rlp-groups in a radio-link-terminal. \nrlt-mode is in reality a consequence of the configuration of the members in those two groups and should not be a configurable leaf/container itself.\nOne way to handle this conflict is to remove/deprecate & make rlt-mode optional instead of evolving the configuration of it.\n\n",
@@ -2886,14 +2887,14 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I am not sure about \"YANG principles state that configuration of one leaf shall not impact the configuration of other leafs\". YANG provides constructs to define relationships between the configuration of different nodes such as when statements, must statements, or leafref with require-instance true\n\nThe principle is that the configuration state needs to be consistent and there is no need to enforce a specific procedure to change the configuration state A to configuration state B",
           "createdAt": "2026-05-21T08:20:26Z",
           "updatedAt": "2026-05-21T08:46:19Z"
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "The rlt-mode is currently mandatory. My understanding is that the rtl-mode has impacts on the number of carriers but it provides additional information. For example, if the rlt-mode is 1+1 mode there must be two carriers but if there are two carriers the RLT model can be either 1+1 or 2+0 so the rlt-mode information is needed to disambiguate these two cases.",
           "createdAt": "2026-05-21T08:46:24Z",
           "updatedAt": "2026-05-21T08:46:24Z"
@@ -2914,7 +2915,7 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "@JonasAhl so your point is that the RLT mode information can be understood from the number of carriers, the protection group and XPIC configuration, right?\n\nIf this is the case, I think you are right and the RLT mode information is fully redundant",
           "createdAt": "2026-05-21T09:00:50Z",
           "updatedAt": "2026-05-21T09:00:50Z"
@@ -2935,14 +2936,14 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "remove mandatory from the attributes in the grouping.\nadd 'config false' to the container rlt-mode that uses the grouping.\nThe choice should not be mandatory either.  Look into what happens when a choice has one mandatory option and one non-mandatory option.\n\nAction: review the implementation of choice.",
           "createdAt": "2026-05-28T09:37:23Z",
           "updatedAt": "2026-05-28T09:37:23Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "The information in the current bis for mode and rlt-mode is redundant information.\nStarting from RFC8561:\nKeep the leaf mode and the identity for backward compatibility reasons.  Remove mandatory and set the status to deprecated.\nAdd rlt-mode as a string (config false) populated with the counts from leaf-list carrier-termination and leaf-list protection-group.\n\nImpact on current bis is to remove the choice related to mode and rlt-mode.  Also deprecate the identity for rlt-mode. And remove the rlt-mode grouping from the types module.\n\nThis removes the ability to configure the mode with conflicting information.  Just using the rlt-mode for documentation (config false).",
           "createdAt": "2026-06-11T09:47:09Z",
           "updatedAt": "2026-06-11T09:47:09Z"
@@ -2953,7 +2954,7 @@
       "number": 64,
       "id": "I_kwDOHLTwws8AAAABB9URuw",
       "title": "How much node capability/planning data is supposed/realistic to support by YANG models",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/64",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/64",
       "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
@@ -2980,7 +2981,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Operators are using this data for use-cases other than planning.  There is a potential for a large amount of data, but it is not mandatory.",
           "createdAt": "2026-05-28T10:02:56Z",
           "updatedAt": "2026-05-28T10:02:56Z"
@@ -2991,7 +2992,7 @@
       "number": 65,
       "id": "I_kwDOHLTwws8AAAABC8r8Kw",
       "title": "Snir and xpi ranges",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/65",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/65",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -3006,7 +3007,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Reaching out to radio experts and reviewing the contents of ETSI TR 102 311, to determine what a negative value would mean and if that makes sense.",
           "createdAt": "2026-05-28T09:10:12Z",
           "updatedAt": "2026-05-28T09:10:12Z"
@@ -3027,7 +3028,7 @@
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Microwave experts indicate that negative values for snir and xpi are not appropriate.",
           "createdAt": "2026-06-11T09:07:45Z",
           "updatedAt": "2026-06-11T09:07:45Z"
@@ -3040,16 +3041,16 @@
       "number": 10,
       "id": "PR_kwDOHLTwws47AVdN",
       "title": "RLT mode",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/10",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/10",
       "state": "MERGED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Proposed changes to allow a more flexible RLT mode definition: fix #9",
       "createdAt": "2022-07-07T09:48:07Z",
       "updatedAt": "2022-09-08T08:58:03Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "d402291d3221e35c8643931ce0bd41ece91add9d",
       "headRepository": "italobusi/draft-ybam-rfc8561bis",
@@ -3082,7 +3083,7 @@
             "abbreviatedOid": "84507fc"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2022-09-08T08:57:48Z",
@@ -3095,16 +3096,16 @@
       "number": 21,
       "id": "PR_kwDOHLTwws5cJOHQ",
       "title": "Prepared for -00 I-D text",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/21",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/21",
       "state": "MERGED",
       "author": "italobusi",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2023-10-06T19:34:06Z",
       "updatedAt": "2023-10-17T19:42:57Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "39656b6ced2db9de0414377657111a0791e59c15",
       "headRepository": "italobusi/draft-ybam-rfc8561bis",
@@ -3123,19 +3124,19 @@
       "number": 36,
       "id": "PR_kwDOHLTwws57VIDq",
       "title": "2024 09 sam",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/36",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/36",
       "state": "MERGED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Implementation of Issue #35 and Issue #31 ",
       "createdAt": "2024-09-12T16:41:07Z",
       "updatedAt": "2024-12-17T20:26:23Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "9be461c25b83748874c4f83d5926b1c5bbba2fc5",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "2024-09-sam",
       "headRefOid": "274a6bf2dd87aea7d6eaca82ffa34232ae4f994b",
       "closedAt": "2024-12-17T20:26:23Z",
@@ -3147,7 +3148,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "> I am not sure why there are 23 files changed. In theory, only the ietf-microwave-radio-link.yang and ietf-microwave-types.yang and their trees should have been changed.\r\n> \r\n> For example:\r\n> \r\n> * Why there is the draft-ybam-rfc8561bis-01.txt file in the repository?\r\n> * There is no need to include the draft-ybam-rfc8561bis.txt in the repository: it is possible to use the links in the README file to read the latest editors' version of the draft\r\n\r\nI'll take the txt out of the repository on a further commit.",
           "createdAt": "2024-12-13T13:07:30Z",
           "updatedAt": "2024-12-13T13:07:30Z"
@@ -3173,7 +3174,7 @@
             "abbreviatedOid": "5eb5c4b"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "I am not sure why there are 23 files changed. In theory, only the ietf-microwave-radio-link.yang and ietf-microwave-types.yang and their trees should have been changed.\r\n\r\nFor example:\r\n- Why there is the draft-ybam-rfc8561bis-01.txt file in the repository?\r\n- There is no need to include the draft-ybam-rfc8561bis.txt in the repository: it is possible to use the links in the README file to read the latest editors' version of the draft\r\n",
           "createdAt": "2024-11-15T22:25:12Z",
@@ -3217,7 +3218,7 @@
             "abbreviatedOid": "5eb5c4b"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-13T12:58:46Z",
@@ -3237,7 +3238,7 @@
             "abbreviatedOid": "5eb5c4b"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-13T13:01:01Z",
@@ -3257,7 +3258,7 @@
             "abbreviatedOid": "5eb5c4b"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-13T13:02:20Z",
@@ -3277,7 +3278,7 @@
             "abbreviatedOid": "5eb5c4b"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-13T13:04:28Z",
@@ -3297,7 +3298,7 @@
             "abbreviatedOid": "5eb5c4b"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-13T13:04:45Z",
@@ -3317,7 +3318,7 @@
       "number": 38,
       "id": "PR_kwDOHLTwws5-RkGL",
       "title": "Fixups",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/38",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/38",
       "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "CONTRIBUTOR",
@@ -3326,7 +3327,7 @@
       "body": "",
       "createdAt": "2024-10-10T21:45:05Z",
       "updatedAt": "2024-10-11T00:50:43Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "91021696bb3a9a6d801aea0da724bde57dfe5ed4",
       "headRepository": "martinthomson/draft-ybam-rfc8561bis",
@@ -3345,7 +3346,7 @@
       "number": 40,
       "id": "PR_kwDOHLTwws5_xZrY",
       "title": "Header Compression",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/40",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/40",
       "state": "MERGED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
@@ -3356,10 +3357,10 @@
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
       "updatedAt": "2025-04-04T08:59:40Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "56e805309ae448a16efb0d05d62d92f7f038e694",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "eth-compression",
       "headRefOid": "5162ede6c79d6adf07c99dcd46132c0545f0b13f",
       "closedAt": "2025-04-04T08:59:39Z",
@@ -3397,7 +3398,7 @@
             "abbreviatedOid": "f0c20f4"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "I have made some detailed comments embedded in github code to make it easy to track\r\n\r\nNot being a subject experts, some comments are based on what I have understood from the YANG model\r\n\r\nI have also some general comments:\r\n\r\n1) From the feature definition, I understand that supporting header compression and the possibility to enable/disable it is a mandatory requirements for any implementation while the possibility to support different profiles for header compressions is optional\r\n\r\n   If this was not the intention, the YANG model needs to be updated tor reflect the real intention\r\n\r\n2) The list of profiles is defined under the RLT. Therefore, different RLTs can support different profiles.\r\n\r\n   Was that the intention or the list of supported profiles shall be defined at the node level?\r\n\r\n3) The code needs to be pretty printed using 'pyang -f yang'\r\n\r\n4) The generated YANG tree lines are too long for being embedded within the draft. I would suggest to compile the code using 'pyang --strict --ietf --max-line-length 69 -f tree --tree-line-length=69'",
           "createdAt": "2024-12-12T16:33:05Z",
@@ -3555,7 +3556,7 @@
             "abbreviatedOid": "f0c20f4"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-12T17:27:19Z",
@@ -3675,7 +3676,7 @@
             "abbreviatedOid": "275c663"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "",
           "createdAt": "2025-02-06T12:07:16Z",
@@ -3841,7 +3842,7 @@
             "abbreviatedOid": "5162ede"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "I think we can merge this PR and create an open issue to discuss the only pending comment of my review: https://github.com/samans/draft-ybam-rfc8561bis/pull/40/files#r1944626680",
           "createdAt": "2025-02-06T18:55:34Z",
@@ -3867,7 +3868,7 @@
       "number": 41,
       "id": "PR_kwDOHLTwws6B0UF7",
       "title": "Reference Modulation",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/41",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/41",
       "state": "MERGED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -3876,10 +3877,10 @@
       "body": "Fix #16",
       "createdAt": "2024-11-13T17:31:03Z",
       "updatedAt": "2024-12-17T20:29:23Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "59467d19d9859214517e3c63990cf1820ad9ad02",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "Reference_modul",
       "headRefOid": "f746ed6916ae2616155a383300501fb7a95f06c7",
       "closedAt": "2024-12-17T20:29:23Z",
@@ -3896,7 +3897,7 @@
             "abbreviatedOid": "b7bc199"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "I have just few formatting and editorial comments\r\n\r\nI would suggest to rename the PR to something like \"Added parameters for reference modulation\" and indicate that this PR when merged it will close issue #16 \r\n\r\nThis PR contains also some changes which are duplicated with the changes in PR #36 and not associated with issue #16 which could create conflicts when both PRs are to be merged",
           "createdAt": "2024-11-15T22:40:02Z",
@@ -3940,7 +3941,7 @@
       "number": 47,
       "id": "PR_kwDOHLTwws6PHwqD",
       "title": "radio-signal-id (Trail trace identifier (TTI))",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/47",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/47",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -3949,10 +3950,10 @@
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
       "updatedAt": "2025-06-05T09:41:36Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "Radio-signal-id",
       "headRefOid": "7d8f91ba1438afb0aef241d3087c4cc3ea58837d",
       "closedAt": "2025-06-05T09:41:35Z",
@@ -3976,14 +3977,14 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Discussion during the call on May 22:\r\n\r\n![image](https://github.com/user-attachments/assets/6755df64-e6e1-42cb-b92f-a59fd129a5d7)\r\n\r\n![image](https://github.com/user-attachments/assets/3b838cec-fbd0-4896-b104-96f447507b08)\r\n\r\nAgreed:\r\n- need to clarify that the near-end node is checking that the far-end ID (transmitted by the far-end and received by the near-end) is matching the expected far-end ID as configured in the near-end node\r\n- the default value for the enable attribute is implementation specific\r\n- a must statement can be add for the enable attribute to ensure that when the enable is set to true either the near-end id or the expected far-end id value is also configured\r\n- the default value for the expected far-end id is the same as the near-end id\r\n\r\nFor further discussion whether to include the far-end in the attribute names or group the new attributes into a far-end container or just clarify the meaning of the attributes in the description\r\n\r\nNote: these considerations are equally applicable to carrier and RLT ids",
           "createdAt": "2025-05-22T09:55:23Z",
           "updatedAt": "2025-05-22T09:56:35Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Suggestion is to close this pull request, and open a new pull request using the latest yang file.",
           "createdAt": "2025-06-05T09:41:35Z",
           "updatedAt": "2025-06-05T09:41:35Z"
@@ -4022,7 +4023,7 @@
             "abbreviatedOid": "7d8f91b"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-04-10T11:42:03Z",
@@ -4225,7 +4226,7 @@
       "number": 52,
       "id": "PR_kwDOHLTwws69XZS6",
       "title": "New modulation value",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/52",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/52",
       "state": "MERGED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -4234,10 +4235,10 @@
       "body": "This pull-request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/49.",
       "createdAt": "2026-01-15T11:46:52Z",
       "updatedAt": "2026-02-25T10:00:45Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "New-modulation-value",
       "headRefOid": "d03a09be90991baae1b2f2d2f9882f7a7aedc795",
       "closedAt": "2026-02-25T10:00:45Z",
@@ -4249,14 +4250,14 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "I'm trying to understand what fourth-bpsk means.  half-bpsk means that the data rate is reduced by (I assume half).  Does fourth-bpsk reduce the data rate by a quarter?  So it is halfway between bpsk and half-bpsk?\r\n\r\nOr is it something else entirely?\r\n\r\nLooking at the standards in ETSI, ITU-T, and others, BPSK is mentioned but all the flavors of BPSK listed in this ID are not specifically standardized.  So, I suggest more information is added to the descriptions to provide more detail on what the technique means.",
           "createdAt": "2026-02-12T11:58:52Z",
           "updatedAt": "2026-02-12T11:58:52Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Update the descriptions of the identities to describe what strong and light mean, also what fourth and half mean.  Add an eighth-bpsk entry for future proofing.\r\n\r\nClarify the net throughput is defined in the speed.",
           "createdAt": "2026-02-19T11:10:11Z",
           "updatedAt": "2026-02-19T11:10:11Z"
@@ -4268,7 +4269,7 @@
       "number": 53,
       "id": "PR_kwDOHLTwws69aZTx",
       "title": "Radio signal",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/53",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/53",
       "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -4277,10 +4278,10 @@
       "body": "This pul request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2026-01-15T15:44:21Z",
       "updatedAt": "2026-01-15T15:51:09Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "Radio-signal-id",
       "headRefOid": "26d0391d9a689636377d1fd81f23caee53666e9e",
       "closedAt": "2026-01-15T15:50:33Z",
@@ -4302,7 +4303,7 @@
       "number": 54,
       "id": "PR_kwDOHLTwws69ahe6",
       "title": "Radio Signal IDs new",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/54",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/54",
       "state": "MERGED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
@@ -4311,10 +4312,10 @@
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
       "updatedAt": "2026-02-25T09:57:59Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "Radio-Signal-new",
       "headRefOid": "6105849b738a5949129ed4c7f0b54a0f48704c66",
       "closedAt": "2026-02-25T09:57:59Z",
@@ -4326,7 +4327,7 @@
       "comments": [
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "> General comments:\r\n> \r\n> 1. The revision statements need some clean-up: see #55 .\r\n>    This can be done after merging the PR to avoid merge conflict or as part of this PR\r\n> 2. It seems some lines are too long.\r\n>    I would suggest pretty printing the YANG file using 'pyang --strict --ietf --max-line-length 69 -f yang'\r\n\r\nIssue #55 will be progressed separately.\r\nThe line length will be done in a different pull request, at the end of the process. ",
           "createdAt": "2026-02-05T10:09:12Z",
           "updatedAt": "2026-02-05T10:09:12Z"
@@ -4339,7 +4340,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "General comments:\r\n\r\n1) The revision statements need some clean-up: see #55 .\r\n\r\n   This can be done after merging the PR to avoid merge conflict or as part of this PR\r\n\r\n2) It seems some lines are too long.\r\n\r\n   I would suggest pretty printing the YANG file using 'pyang --strict --ietf --max-line-length 69 -f yang'\r\n",
           "createdAt": "2026-01-27T23:11:33Z",
@@ -4407,7 +4408,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-05T10:24:39Z",
@@ -4427,7 +4428,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-05T10:28:33Z",
@@ -4447,7 +4448,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-05T10:33:45Z",
@@ -4547,7 +4548,7 @@
             "abbreviatedOid": "dbe2d97"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2026-02-12T00:04:52Z",
@@ -4640,7 +4641,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-17T15:27:02Z",
@@ -4660,7 +4661,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-17T15:43:04Z",
@@ -4680,7 +4681,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-17T15:47:44Z",
@@ -4720,7 +4721,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-19T10:24:58Z",
@@ -4740,7 +4741,7 @@
             "abbreviatedOid": "e1b8696"
           },
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-19T10:41:06Z",
@@ -4760,7 +4761,7 @@
       "number": 62,
       "id": "PR_kwDOHLTwws7XHvDL",
       "title": "#26 (issue) add rx-enabled and rx-oper-status",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/62",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/62",
       "state": "OPEN",
       "author": "mamali68",
       "authorAssociation": "COLLABORATOR",
@@ -4771,10 +4772,10 @@
       "body": "",
       "createdAt": "2026-04-30T13:31:38Z",
       "updatedAt": "2026-06-22T15:16:11Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "f665bc499ce46f356239b7caf4de3db2642973c4",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "26-air-interfacereceiver-is-on",
       "headRefOid": "ae89123c8f1695813ceafbdf45d04ef2900f40fa",
       "closedAt": null,
@@ -4791,21 +4792,21 @@
         },
         {
           "author": "italobusi",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I have fixed the main branch and rebased this branch to resolve some CI/CD errors (due to some changes in the repository template)\r\n\r\nThe issue and work-around are described here:\r\n\r\n[kdrfc cannot find aasvg \u00b7 Issue #516 \u00b7 martinthomson/i-d-template](https://github.com/martinthomson/i-d-template/issues/516)",
           "createdAt": "2026-05-14T16:42:26Z",
           "updatedAt": "2026-05-14T16:43:01Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Add to the description of rx-enabled to not allow a receiver to be disabled if it is the only receiver.",
           "createdAt": "2026-06-18T09:21:22Z",
           "updatedAt": "2026-06-18T09:21:22Z"
         },
         {
           "author": "samans",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "remove common typedef txrx-oper-status.\r\n\r\nrevert back to oper-status being an specific for rx-oper-status and tx-oper-status (because receivers can't be standby)\r\n\r\nrx-enabled and rx-oper-status remain.  update the rx-enabled description as described above.",
           "createdAt": "2026-06-18T09:29:55Z",
           "updatedAt": "2026-06-18T09:29:55Z"
@@ -4838,25 +4839,27 @@
       "number": 66,
       "id": "PR_kwDOHLTwws8AAAABLkD7CA",
       "title": "2026-10-refresh",
-      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/66",
-      "state": "OPEN",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/66",
+      "state": "MERGED",
       "author": "samans",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Clean up and refresh of draft for IETF 127",
       "createdAt": "2026-10-29T15:35:43Z",
-      "updatedAt": "2026-10-29T16:11:47Z",
-      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "updatedAt": "2026-11-03T11:48:11Z",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
-      "baseRefOid": "430d939471c01d911abd13cc5e09b8a4f6c0f83a",
-      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefOid": "95f7f26ea028dc4ce80e05c8696035a879d6e7a3",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "headRefName": "2026-10-refresh",
-      "headRefOid": "d71807f17feba1c1ea43f7e6479c2e095f9bae27",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1ae735d96982d452b601ed1c09b286d6cd99515d",
+      "closedAt": "2026-11-03T11:48:11Z",
+      "mergedAt": "2026-11-03T11:48:11Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "b74ebc073774413b7691519bcd7929873599f60f"
+      },
       "comments": [],
       "reviews": [
         {
