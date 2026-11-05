@@ -1,0 +1,32 @@
+5 November 2026
+
+Attendees:   Jonas (Ericsson), Daniela (Nokia), Martin (Highstreet Technologies), Mohammad (Highstreet Technologies)
+
+# Agenda
+- Open Actions
+
+# Open Action Items
+- Review and continue to update the Open Issues (https://github.com/samans/draft-ybam-rfc8561bis/issues)
+- Discussed https://github.com/samans/draft-ybam-rfc8561bis/issues/16
+  - Concluded the discussion and created a proposal on how to move forward. See comment in issue, and a copy of it below.
+    Today at the regular meeting we agreed to move forward with the proposal described by a previous comment by Scott.
+    "Use the Reference Modulation Index from the ETSI table instead of Spectral Efficiency Class or the Reference Modulation Scheme.
+    Model Reference Modulation Index as an Integer with range of 1-16.
+    So move the reference-modulation-index above the choice of coding-modulation-mode making reference-modulation-index a integer rw leaf with range 1-16 (not mandatory)."
+    In addition to that proposal we also need a clear description:
+    "The reference-modulation-index is the minimum spectrum efficiency class to be fulfilled by the radio link configuration, as defined in ETSI EN 302 217-2.
+     The reference modulation index identifies the minimum spectrum efficiency class and the associated characteristics (i.e. system capacity, spectral efficiency class,
+     spectrum mask over a given channel separation) to be used (i.e. declared in the licensing process) in the link per link coordination analysis.
+     In cases where there are two subclasses A and B, the assumption is that the radio link configuration should fulfill both classes."
+
+# Next Meetings: (Please indicate if you are not available - helps with planning)
+- 2026-10-29: Finalize Issue #16, get an update on Issue #2 and then, Issue Review
+- 2026-11-05: 
+- 2026-11-12:  Cancel (IEEE 802.1 meeting)
+- 2026-11-19:  Cancel (IETF 127)
+- 2026-11-26:  Cancel (US Holiday)
+- 2026-12-03:
+- 2026-12-10:
+- 2026-12-17:
+- 2026-12-24:  Cancel (Holiday)
+- 2026-12-31:  Cancel (Holiday)
