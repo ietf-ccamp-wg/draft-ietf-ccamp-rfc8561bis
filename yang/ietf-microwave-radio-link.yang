@@ -31,7 +31,7 @@ module ietf-microwave-radio-link {
     "Internet Engineering Task Force (IETF) CCAMP WG";
   contact
     "WG List: <mailto:ccamp@ietf.org>
-
+     
      Editors:
       Jonas Ahlberg (jonas.ahlberg@ericsson.com)
       Min Ye (amy.yemin@huawei.com)
@@ -49,18 +49,18 @@ module ietf-microwave-radio-link {
      YANG data model in order to make it available for other
      interface types as well. This is a YANG module for the
      entities in a generic microwave system.
-
-
+     
+     
      Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
-
+     
      Redistribution and use in source and binary forms, with or
      without modification, is permitted pursuant to, and subject
      to the license terms contained in, the Revised BSD License
      set forth in Section 4.c of the IETF Trust's Legal Provisions
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
-
+     
      This version of this YANG module is part of RFC 8561bis;
      see the RFC itself for full legal notices.";
 
@@ -68,7 +68,6 @@ module ietf-microwave-radio-link {
   // this note
   // replace the revision date with the module publication date
   // the format is (year-month-day)
-
   revision 2026-10-29 {
     description
       "TBD";
@@ -85,7 +84,6 @@ module ietf-microwave-radio-link {
   /*
    * Features
    */
-
   feature xpic {
     description
       "Indicates that the device supports XPIC.";
@@ -114,7 +112,6 @@ module ietf-microwave-radio-link {
   /*
    * Typedefs
    */
-
   grouping acm-profile {
     description
       "acm-profile";
@@ -166,7 +163,6 @@ module ietf-microwave-radio-link {
   /*
    * Radio Link Terminal (RLT)
    */
-
   augment "/if:interfaces/if:interface" {
     when "derived-from-or-self(if:type,"
        + "'ianaift:microwaveRadioLinkTerminal')";
@@ -199,6 +195,13 @@ module ietf-microwave-radio-link {
          value received from the far-end RLT).
          By default it is the same as the 'id'.";
     }
+    leaf local-child-rlt {
+      type leafref {
+        path "/if:interfaces/if:interface/if:name";
+      }
+      description
+        "Reference to the id of the local child RLT interface.";
+    }
     choice mode-option {
       mandatory true;
       description
@@ -218,7 +221,7 @@ module ietf-microwave-radio-link {
            X represents the number of bonded carrier terminations.
            Y represents the number of protecting carrier
            terminations.
-
+           
            This attribute has been deprecated: the rlt-mode container
            which provide flexible definitions of number of bonded
            carriers and protecting carriers should be used instead.";
@@ -363,7 +366,6 @@ module ietf-microwave-radio-link {
   /*
    * Carrier Termination
    */
-
   augment "/if:interfaces/if:interface" {
     when "derived-from-or-self(if:type,"
        + "'ianaift:microwaveCarrierTermination')";
@@ -512,7 +514,7 @@ module ietf-microwave-radio-link {
           mandatory true;
           description
             "Minimum output power.
-
+             
              By default, minimum output power is the same as the
              system capability minimum-power.";
         }
@@ -1043,10 +1045,38 @@ module ietf-microwave-radio-link {
     }
   }
 
+  augment "/if:interfaces/if:interface" {
+    when "not(derived-from-or-self(if:type,
+             'ianaift:microwaveCarrierTermination')
+         or derived-from-or-self(if:type,
+             'ianaift:microwaveRadioLinkTerminal'))";
+    description
+      "Augment only interfaces that are neither
+       microwaveCarrierTermination nor
+       microwaveRadioLinkTerminal.";
+
+    leaf remote-child-rlt {
+      must "derived-from-or-self(/if:interfaces/if:interface"
+           + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
+      type leafref {
+        path "/if:interfaces/if:interface/if:name";
+      }
+      description
+        "Reference to the name of the remote child RLT interface.";
+    }
+    leaf remote-parent-rlt {
+      must "derived-from-or-self(/if:interfaces/if:interface"
+           + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
+      type leafref {
+        path "/if:interfaces/if:interface/if:name";
+      }
+      description
+        "Reference to the name of the remote parent RLT interface.";
+    }
+  }
   /*
    * Radio Link Protection Groups
    */
-
   container radio-link-protection-groups {
     description
       "Configuration of radio link protected groups of
@@ -1077,7 +1107,6 @@ module ietf-microwave-radio-link {
   /*
    * XPIC & MIMO groups - Configuration data nodes
    */
-
   container xpic-pairs {
     if-feature "xpic";
     description
@@ -1156,3 +1185,4 @@ module ietf-microwave-radio-link {
     }
   }
 }
+
