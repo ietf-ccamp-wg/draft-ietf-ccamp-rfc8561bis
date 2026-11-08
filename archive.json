@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-05T06:16:17.818419+00:00",
+  "timestamp": "2026-11-08T05:42:14.653610+00:00",
   "repo": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
   "labels": [
     {
@@ -916,7 +916,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-11-02T14:35:12Z",
+      "updatedAt": "2026-11-05T10:39:47Z",
       "closedAt": null,
       "comments": [
         {
@@ -1191,6 +1191,13 @@
           "body": "After additional discussions with radio experts, our conclusion is the following:\n- Subclass A is normally no longer used, but ETSI has still decided to keep it in their standard in order to cover legacy\n- Subclass B is what is used today, and it is more strict than subclass A, which means that if you fulfill B you also fulfill A.\n--> Let's use RMI as the identifier (as earlier suggested) and include a statement in the description that in cases where there are subclasses both should be fulfilled.\n- In case someone really needs to model A and B, an additional proprietary leaf can be added to support that without having to change the standard model using RMI.",
           "createdAt": "2026-11-02T14:35:12Z",
           "updatedAt": "2026-11-02T14:35:12Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Today at the regular meeting we agreed to move forward with the proposal described by a previous comment by Scott.\n\n\"Use the Reference Modulation Index from the ETSI table instead of Spectral Efficiency Class or the Reference Modulation Scheme.\n\nModel Reference Modulation Index as an Integer with range of 1-16.\n\nSo move the reference-modulation-index above the choice of coding-modulation-mode making reference-modulation-index a integer rw leaf with range 1-16 (not mandatory).\"\n\nIn addition to that proposal we also need a clear description:\n\"The reference-modulation-index is the minimum spectrum efficiency class to be fulfilled by the radio link configuration, as defined in                ETSI EN 302 217-2. The reference modulation index identifies the minimum spectrum efficiency class and the associated characteristics (i.e. system capacity, spectral efficiency class, spectrum mask over a given channel separation) to be used (i.e. declared in the licensing process) in the link per link coordination analysis. In cases where there are two subclasses A and B, the assumption is that the radio link configuration should fulfill both classes.\"",
+          "createdAt": "2026-11-05T10:39:47Z",
+          "updatedAt": "2026-11-05T10:39:47Z"
         }
       ]
     },
@@ -4876,6 +4883,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 67,
+      "id": "PR_kwDOHLTwws8AAAABNDiiLg",
+      "title": "#2 add new Augment and new Leaf",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/pull/67",
+      "state": "OPEN",
+      "author": "mamali68",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "mamali68"
+      ],
+      "labels": [],
+      "body": "To implement the changes in #2 \n\n`+--rw local-child-rlt?            -> /if:interfaces/interface/name\n`\n.\n.\n.\n\n\n```\naugment /if:interfaces/if:interface:\n    +--rw remote-child-rlt?    -> /if:interfaces/interface/name\n    +--rw remote-parent-rlt?   -> /if:interfaces/interface/name\n```",
+      "createdAt": "2026-11-05T11:53:02Z",
+      "updatedAt": "2026-11-05T11:53:02Z",
+      "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "b47456377643a515c1061931e5b485615d39f896",
+      "headRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
+      "headRefName": "2-band-carrier-aggregation",
+      "headRefOid": "32a76b5109346f7c8d3b64e52ef403482a6a371e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
