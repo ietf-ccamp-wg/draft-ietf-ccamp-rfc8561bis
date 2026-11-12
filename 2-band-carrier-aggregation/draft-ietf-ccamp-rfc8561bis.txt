@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 9 May 2027                                                M. Ye
+Expires: 16 May 2027                                               M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                            Tech Mahindra
-                                                         5 November 2026
+                                                        12 November 2026
 
 
                A YANG Data Model for Microwave Radio Link
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2027.
+   This Internet-Draft will expire on 16 May 2027.
 
 Copyright Notice
 
@@ -461,6 +461,7 @@ Table of Contents
      // this note
      // replace the revision date with the module publication date
      // the format is (year-month-day)
+
      revision 2026-10-29 {
        description
          "TBD";
@@ -477,6 +478,7 @@ Table of Contents
      /*
       * Features
       */
+
      feature xpic {
        description
          "Indicates that the device supports XPIC.";
@@ -505,6 +507,7 @@ Table of Contents
      /*
       * Typedefs
       */
+
      grouping acm-profile {
        description
          "acm-profile";
@@ -556,6 +559,7 @@ Table of Contents
      /*
       * Radio Link Terminal (RLT)
       */
+
      augment "/if:interfaces/if:interface" {
        when "derived-from-or-self(if:type,"
           + "'ianaift:microwaveRadioLinkTerminal')";
@@ -588,12 +592,45 @@ Table of Contents
             value received from the far-end RLT).
             By default it is the same as the 'id'.";
        }
-       leaf local-child-rlt {
-         type leafref {
-           path "/if:interfaces/if:interface/if:name";
-         }
+       leaf-list local-child-rlt {
+         type if:interface-ref;
+         must "derived-from-or-self(/if:interfaces/if:interface"
+            + "[if:name = current()]"
+            + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
          description
            "Reference to the id of the local child RLT interface.";
+       }
+       leaf-list remote-child-rlt {
+         type if:interface-ref;
+         must "not(derived-from-or-self(/if:interfaces/if:interface"
+            + "[if:name = current()]/if:type,
+   'ianaift:microwaveCarrierTermination')
+   or derived-from-or-self(/if:interfaces/if:interface"
+            + "[if:name = current()]/if:type,
+   'ianaift:microwaveRadioLinkTerminal'))" {
+           description
+             "The type of interface must not be
+              'microwaveCarrierTermination' nor
+              'microwaveRadioLinkTerminal'.";
+         }
+         description
+           "Reference to the name of the remote child RLT interface.";
+       }
+       leaf remote-parent-rlt {
+         type if:interface-ref;
+         must "not(derived-from-or-self(/if:interfaces/if:interface"
+            + "[if:name = current()]/if:type,
+   'ianaift:microwaveCarrierTermination')
+   or derived-from-or-self(/if:interfaces/if:interface"
+            + "[if:name = current()]/if:type,
+   'ianaift:microwaveRadioLinkTerminal'))" {
+           description
+             "The type of interface must not be
+              'microwaveCarrierTermination' nor
+              'microwaveRadioLinkTerminal'.";
+         }
+         description
+           "Reference to the name of the remote parent RLT interface.";
        }
        choice mode-option {
          mandatory true;
@@ -759,6 +796,7 @@ Table of Contents
      /*
       * Carrier Termination
       */
+
      augment "/if:interfaces/if:interface" {
        when "derived-from-or-self(if:type,"
           + "'ianaift:microwaveCarrierTermination')";
@@ -1438,38 +1476,10 @@ Table of Contents
        }
      }
 
-     augment "/if:interfaces/if:interface" {
-       when "not(derived-from-or-self(if:type,
-                'ianaift:microwaveCarrierTermination')
-            or derived-from-or-self(if:type,
-                'ianaift:microwaveRadioLinkTerminal'))";
-       description
-         "Augment only interfaces that are neither
-          microwaveCarrierTermination nor
-          microwaveRadioLinkTerminal.";
-
-       leaf remote-child-rlt {
-         must "derived-from-or-self(/if:interfaces/if:interface"
-              + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
-         type leafref {
-           path "/if:interfaces/if:interface/if:name";
-         }
-         description
-           "Reference to the name of the remote child RLT interface.";
-       }
-       leaf remote-parent-rlt {
-         must "derived-from-or-self(/if:interfaces/if:interface"
-              + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
-         type leafref {
-           path "/if:interfaces/if:interface/if:name";
-         }
-         description
-           "Reference to the name of the remote parent RLT interface.";
-       }
-     }
      /*
       * Radio Link Protection Groups
       */
+
      container radio-link-protection-groups {
        description
          "Configuration of radio link protected groups of
@@ -1500,6 +1510,7 @@ Table of Contents
      /*
       * XPIC & MIMO groups - Configuration data nodes
       */
+
      container xpic-pairs {
        if-feature "xpic";
        description
