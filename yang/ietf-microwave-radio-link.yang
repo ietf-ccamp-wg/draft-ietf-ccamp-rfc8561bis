@@ -205,7 +205,7 @@ module ietf-microwave-radio-link {
          + "[if:name = current()]"
          + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
       description
-        "Reference to the id of the local child RLT interface.";
+        "List of interface references to local child RLT interfaces.";
     }
     leaf-list remote-child-rlt {
       type if:interface-ref;
@@ -221,7 +221,7 @@ or derived-from-or-self(/if:interfaces/if:interface"
            'microwaveRadioLinkTerminal'.";
       }
       description
-        "Reference to the name of the remote child RLT interface.";
+        "List of interface references to remote child RLT interfaces.";
     }
     leaf remote-parent-rlt {
       type if:interface-ref;
@@ -237,7 +237,7 @@ or derived-from-or-self(/if:interfaces/if:interface"
            'microwaveRadioLinkTerminal'.";
       }
       description
-        "Reference to the name of the remote parent RLT interface.";
+        "Reference to the remote parent RLT interface.";
     }
     choice mode-option {
       mandatory true;
