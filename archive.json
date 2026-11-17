@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-15T05:59:40.386712+00:00",
+  "timestamp": "2026-11-17T07:37:12.741452+00:00",
   "repo": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
   "labels": [
     {
@@ -4898,7 +4898,7 @@
       "labels": [],
       "body": "To implement the changes in #2 \n\n`+--rw local-child-rlt?            -> /if:interfaces/interface/name\n`\n.\n.\n.\n\n\n```\naugment /if:interfaces/if:interface:\n    +--rw remote-child-rlt?    -> /if:interfaces/interface/name\n    +--rw remote-parent-rlt?   -> /if:interfaces/interface/name\n```",
       "createdAt": "2026-11-05T11:53:02Z",
-      "updatedAt": "2026-11-12T14:47:38Z",
+      "updatedAt": "2026-11-16T10:56:58Z",
       "baseRepository": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b47456377643a515c1061931e5b485615d39f896",
@@ -4910,7 +4910,46 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws8AAAABWN7HqQ",
+          "commit": {
+            "abbreviatedOid": "311a3f6"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Now OK for me",
+          "createdAt": "2026-11-05T13:51:06Z",
+          "updatedAt": "2026-11-16T10:56:58Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "The local-child-rlt*   has to be a list                    of          if:interface-reftype (not leafref) and with a must = RLT",
+              "createdAt": "2026-11-05T13:51:06Z",
+              "updatedAt": "2026-11-16T10:56:58Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "The  **remote-child-rlt*** and **remote-parent-rlt** have to be augmentation for RLT , not an augmentation of interfaces where type not RLT or CT.",
+              "createdAt": "2026-11-05T13:54:25Z",
+              "updatedAt": "2026-11-16T10:56:58Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "The remote-child-rlt* and remote-parent-rlt need to be defined in the same context of local-child-rlt (with a different must condition statement).",
+              "createdAt": "2026-11-05T13:57:16Z",
+              "updatedAt": "2026-11-16T10:56:58Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "Now OK for me",
+              "createdAt": "2026-11-16T10:53:49Z",
+              "updatedAt": "2026-11-16T10:56:58Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
