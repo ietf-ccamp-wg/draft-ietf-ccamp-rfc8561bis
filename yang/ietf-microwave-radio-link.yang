@@ -199,6 +199,46 @@ module ietf-microwave-radio-link {
          value received from the far-end RLT).
          By default it is the same as the 'id'.";
     }
+    leaf-list local-child-rlt {
+      type if:interface-ref;
+      must "derived-from-or-self(/if:interfaces/if:interface"
+         + "[if:name = current()]"
+         + "/if:type, 'ianaift:microwaveRadioLinkTerminal')";
+      description
+        "List of interface references to local child RLT interfaces.";
+    }
+    leaf-list remote-child-rlt {
+      type if:interface-ref;
+      must "not(derived-from-or-self(/if:interfaces/if:interface"
+         + "[if:name = current()]/if:type,
+'ianaift:microwaveCarrierTermination')
+or derived-from-or-self(/if:interfaces/if:interface"
+         + "[if:name = current()]/if:type,
+'ianaift:microwaveRadioLinkTerminal'))" {
+        description
+          "The type of interface must not be
+           'microwaveCarrierTermination' nor
+           'microwaveRadioLinkTerminal'.";
+      }
+      description
+        "List of interface references to remote child RLT interfaces.";
+    }
+    leaf remote-parent-rlt {
+      type if:interface-ref;
+      must "not(derived-from-or-self(/if:interfaces/if:interface"
+         + "[if:name = current()]/if:type,
+'ianaift:microwaveCarrierTermination')
+or derived-from-or-self(/if:interfaces/if:interface"
+         + "[if:name = current()]/if:type,
+'ianaift:microwaveRadioLinkTerminal'))" {
+        description
+          "The type of interface must not be
+           'microwaveCarrierTermination' nor
+           'microwaveRadioLinkTerminal'.";
+      }
+      description
+        "Reference to the remote parent RLT interface.";
+    }
     choice mode-option {
       mandatory true;
       description
