@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-17T07:37:12.741452+00:00",
+  "timestamp": "2026-11-19T06:59:46.862589+00:00",
   "repo": "ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis",
   "labels": [
     {
@@ -3039,6 +3039,30 @@
           "body": "Microwave experts indicate that negative values for snir and xpi are not appropriate.",
           "createdAt": "2026-06-11T09:07:45Z",
           "updatedAt": "2026-06-11T09:07:45Z"
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "id": "I_kwDOHLTwws8AAAABgMTZKA",
+      "title": "Comments from IANA",
+      "url": "https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-rfc8561bis/issues/68",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Dear Authors,\n\nBefore the IETF meeting, we check working group agendas for documents with IANA-related issues. We have notes about this document:\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-ccamp-rfc8561bis-00\n\nThis document needs to tell us what to do about the references to RFC 8561 in these registry groups: \n\nhttps://www.iana.org/assignments/smi-numbers\nhttps://www.iana.org/assignments/xml-registry\nhttps://www.iana.org/assignments/yang-parameters \n\nWhen a document is obsoleted, references are typically replaced. If that should happen here, for the XML and YANG registrations, please use the template from RFC 9907, Section 3.8.3.2. \n\nFor the ifType registrations, you could use the RFC 8561 IANA Considerations section text, but replace \u201c\u201cIANA has registered the following ifTypes in \"ifType definitions\" under [IANA-SMI]\u201d with \u201cIANA will list this document as the reference for the following registrations in the \u201cInterface Types (ifType)\u201d registry in the \u201cStructure of Management Information (SMI) Numbers (MIB Module Registrations)\u201d registry group [IANA-SMI].\u201d The name of the ifType registry was changed by RFC 8892. \n\nIf you have any questions, just let us know. If you'd like to talk in person, you can find us at the IANA table from Monday through Thursday. You can also request another review at any time by contacting us at [iana@iana.org](mailto:iana@iana.org).\n\nFor more information about IANA Considerations section requirements, please see\n\nhttps://www.iana.org/help/protocol-registration\n\nBest regards,\n\nAmanda Baber\nIANA\n\n---\n\nSee: https://mailarchive.ietf.org/arch/msg/ccamp/W3zv_7nfZvbiD66lSyZHOAfBCz4/",
+      "createdAt": "2026-11-17T22:20:55Z",
+      "updatedAt": "2026-11-17T22:21:17Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "italobusi",
+          "authorAssociation": "MEMBER",
+          "body": "My suggestion is to update the IANA consideration sections following the guidelines in RFC 9907",
+          "createdAt": "2026-11-17T22:21:17Z",
+          "updatedAt": "2026-11-17T22:21:17Z"
         }
       ]
     }
